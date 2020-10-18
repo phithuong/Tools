@@ -1,0 +1,12 @@
+{
+    "types_resolve_captcha": ["2captcha", "anticaptcha"],
+    "type_resolve_captcha_idx": 0,
+    "api_key": "aa79f33ff29ced1dff90ca2f4cef4643",
+    "website_url": "https://onevanilla.com",
+    "website_key": "6Lc7IcIUAAAAAOPBNC4usz2kFYS23xU-zVjCYsSl",
+    "proxy_off": false,
+    "proxy_type": "socks5",
+    "proxy_list_file_path": "./proxy_list.txt",
+    "proxy_login": "rajivkumar900",
+    "proxy_password": "Arvind@123"
+}

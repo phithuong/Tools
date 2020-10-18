@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+
+    <title>DEMO CHECK APP</title>
+    <style>
+        .main-process {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="alert-secondary px-2 text-center">
+            <h1>DEMO</h1>
+        </div>
+        <div>
+            <p>
+                <a id="main-app" class="btn btn-primary" data-toggle="collapse" href="#collapseExample-1" role="button" aria-expanded="false" aria-controls="collapseExample-1">
+          MAIN APP
+        </a>
+                <a id="config" class="btn btn-primary" data-toggle="collapse" href="#collapseExample-2" role="button" aria-expanded="false" aria-controls="collapseExample-2">
+          Config
+        </a>
+            </p>
+            <div class="collapse" id="collapseExample-1">
+                <div class="form-group">
+                    <textarea class="form-control" id="infoTextArea" rows="3" placeholder="Input card infor area" onfocus="this.placeholder=''" onblur="this.placeholder='Input card infor area'"></textarea>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword" />
+                    </div>
+                </div>
+
+                <div id="main-process" class="form-group main-process">
+                    <div class="form-check form-check-inline mb-2">
+                        <label class="form-check-label" for="inlineCheckbox1">All/Process/Done/Error:</label>
+                        <label class="form-check-label ml-1" for="inlineCheckbox1">3/1/1/1</label>
+                        <input class="form-check-input ml-5" type="checkbox" id="inlineCheckbox1" value="option1" checked />
+                        <label class="form-check-label" for="inlineCheckbox1">CSV</label>
+                        <input class="form-check-input ml-2" type="checkbox" id="inlineCheckbox1" value="option1" />
+                        <label class="form-check-label" for="inlineCheckbox1">TXT</label>
+                        <button type="button" class="btn btn-primary btn-sm ml-2">
+              Export
+            </button>
+                    </div>
+
+                    <table class="table" id="cardInfoTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">CARD NUMBER</th>
+                                <th scope="col">MM</th>
+                                <th scope="col">YY</th>
+                                <th scope="col">CSV</th>
+                                <th scope="col">Balance</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">C.Result</th>
+                                <th scope="col">Note</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="form-group row">
+                    <button id="btn-start" type="button" class="btn btn-primary btn-lg btn-block">
+            Start
+          </button>
+                </div>
+            </div>
+            <div class="collapse" id="collapseExample-2">
+                <form class="form-inline">
+                    <div class="form-group mb-2">
+                        <!-- <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" /> -->
+                        <label class="form-check-label" for="inlineCheckbox1">Proxy Setup</label>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="text" class="form-control col-6" name="proxy_address" id="proxy_address" placeholder="IPAddress" onfocus="this.placeholder=''" onblur="this.placeholder='IPAddress'" />
+                        <input type="text" class="form-control col-2 ml-1" name="proxy_port" id="proxy_port" placeholder="Port" onfocus="this.placeholder=''" onblur="this.placeholder='Port'" />
+                        <button name="btn-save-config" onclick="save_config()" style="margin-left: 10px;">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+
+</html>
