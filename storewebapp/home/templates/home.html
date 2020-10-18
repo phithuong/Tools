@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!-- {% load static %} -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header>
+        <div class="header-nav hidden-mobile">
+            <div class="logo-group">
+                <span><img class="logoImg" src="{% static 'images/mobile-logo2.png' %}"></img></span>
+                <h1><span style="color: #86bc42;">Vina</span> Mart</h1>
+            </div>
+            <div class="search-group">
+                <div class="search-group-border">
+                    <input type="text" placeholder="Tên sản phầm tìm kiếm...">
+                    <button type="submit" class="btn-search"><i class="fas fa-search"></i> Tìm kiếm</button>
+                </div>
+            </div>
+            <div class="nav-group">
+                <nav class="nav-item">
+                    <ul class="nav-item-group">
+                        <li><i class="fas fa-user fa-2x"></i></li>
+                        <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="header-mobile-nav visible-mobile">
+
+            <nav class="nav-mobile-group">
+                <div class="mobile-humberger"><i class="fas fa-bars fa-2x"></i></div>
+                <div class="logo-mobile-group">
+                    <span><img class="logoImg2" src="{% static 'images/mobile-logo2.png' %}"></img></span>
+                    <h1><span style="color: #86bc42;">Việt</span> Mart</h1>
+                </div>
+                <ul>
+                    <li><i class="fas fa-search fa-2x"></i></li>
+                    <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="main-container">
+        <section id="slide-1">
+            <div class="home-slide owl-carousel owl-theme">
+                <div class="item owl-slide">
+                    <div class="static-wrapper">
+                        <div class="owl-slide-text">
+                            <h2 class="owl-slide-animated owl-slide-title">This is Side 1</h2>
+                        </div>
+                        <div class="owl-slide-animated owl-slide-subtitle">
+                            <p>This is subtitle for slide 1</p>
+                        </div>
+                        <a class="btn-slide owl-slide-animated owl-slide-cta" href="#" role="button">Fanpage</a>
+                    </div>
+                </div>
+                <div class="item owl-slide">
+                    <div class="static-wrapper">
+                        <div class="owl-slide-text">
+                            <h2 class="owl-slide-animated owl-slide-title">This is Side 2</h2>
+                        </div>
+                        <div class="owl-slide-animated owl-slide-subtitle">
+                            <p>This is subtitle for slide 2</p>
+                        </div>
+                        <a class="btn-slide owl-slide-animated owl-slide-cta" href="#" role="button">Fanpage</a>
+                    </div>
+                </div>
+            </div>
+            <!-- end slide-1 -->
+        </section>
+        <section id="slide-2">
+            <div class="wrapper-slide-2">
+                <ul class="slide-2-ul">
+                    <li>
+                        <div class="wrapper-li">
+                            <div class="li-icon-block">
+                                <img src="{% static 'images/market_30x30_crop_center.png ' %}" alt="icon-1">
+                            </div>
+                            <div class="li-text">
+                                <h3>100% an toàn</h3>
+                                <p class="hidden-mobile">ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="wrapper-li">
+                            <div class="li-icon-block">
+                                <img src="{% static 'images/home-delivery_30x30_crop_center.png ' %}" alt="icon-2">
+                            </div>
+                            <div class="li-text">
+                                <h3>vận chuyển miễn phí</h3>
+                                <p class="hidden-mobile">ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="wrapper-li no-border-right">
+                            <div class="li-icon-block">
+                                <img src="{% static 'images/support_1_30x30_crop_center.png ' %}" alt="icon-3">
+                            </div>
+                            <div class="li-text">
+                                <h3>hỗ trợ mọi lúc</h3>
+                                <p class="hidden-mobile">ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="product-area">
+            <div class="product-area-text">
+                <h2><span>Sản phẩm của cửa hàng</span></h2>
+            </div>
+            <div class="product-are-container">
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <h1>Header</h1>
+                    </div>
+                    <ul class="category-items">
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <h1>Header</h1>
+                    </div>
+                    <ul class="category-items">
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <h1>Header</h1>
+                    </div>
+                    <ul class="category-items">
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <h1>Header</h1>
+                    </div>
+                    <ul class="category-items">
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <h1>Header</h1>
+                    </div>
+                    <ul class="category-items">
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <h1>Header</h1>
+                    </div>
+                    <ul class="category-items">
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <h1>Header</h1>
+                    </div>
+                    <ul class="category-items">
+                        <li class="item-wrapper">
+                            <div class="item-row-1">
+                                <div class="item-title">
+                                    <h3>Item Title</h3>
+                                    <div class="item-subtitle-wrapper">
+                                        <i class="fas fa-calculator">1</i>
+                                        <i class="fas fa-box-open">100</i>
+                                    </div>
+                                </div>
+                                <div class="item-price">
+                                    <span>500$</span>
+                                </div>
+                                <div class="item-order">
+                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="hidden-mobile">
+            <div class="lorem-before-end-wrapper">
+                <p class="title-lorem">
+                    <span>How‘re we doing? Give us a feedback.</span><br><span>It’s very important to us to improve your experiences, many thanks for your contributions.</span>
+                </p>
+            </div>
+            <div class="footer-wrapper">
+                <div class="footer-left-content">
+
+                </div>
+                <div class="footer-middle-content">
+                    <div class="logo-group">
+                        <h1><span style="color: #86bc42;">Vina</span> Mart</h1>
+                    </div>
+                    <p>Designed by VinaMart's Team</p>
+                </div>
+                <div class="footer-right-content">
+
+                </div>
+            </div>
+        </div>
+        <div class="visible-mobile">
+            <div class="footer-mobile-bar">
+                <ul>
+                    <li><i class="fas fa-home fa-2x"></i></li>
+                    <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
+                    <li><i class="fab fa-facebook-messenger fa-2x"></i></li>
+                    <li><i class="fas fa-user fa-2x"></i></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/owl.carousel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/app-custom.js' %}"></script>
+</body>
+
+</html>
