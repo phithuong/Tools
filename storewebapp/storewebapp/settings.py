@@ -21,12 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nhl^o9m3knne(9f2ytnz91*5)s()omjil4poc8=9#0wof!q)i5'
+import json
+APP_CONFIG_PATH = os.path.join(BASE_DIR, 'config/app.json')
+app_config = None
+with open(APP_CONFIG_PATH, mode='r') as f:
+    app_config = json.load(f)
+
+SECRET_KEY = app_config['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://mystorewebapp.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'mystorewebapp.herokuapp']
 
 
 # Application definition
