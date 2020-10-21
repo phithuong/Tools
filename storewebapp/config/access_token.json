@@ -1,5 +1,5 @@
 {
-    "end_point": "https://id.kiotviet.vn/connect/token",
+    "endpoint": "https://id.kiotviet.vn/connect/token",
     "client_id": "e4cc9139-86eb-4439-be58-ffd422293cee",
     "client_secret": "E373C96B2F7B0342908BF5B9B0E2BB6BD933BDB8"
 }

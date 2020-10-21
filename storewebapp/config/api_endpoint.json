@@ -1,0 +1,57 @@
+{
+    "GetCategoryList": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/categories",
+        "params": {}
+    },
+    "GetCategoryDetail": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/categories{id}",
+        "params": {}
+    },
+    "GetProductList": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/products",
+        "params": {}
+    },
+    "GetProductDetail": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/products{id}",
+        "params": {}
+    },
+    "AddOrder": {
+        "method": "POST",
+        "endpoint": "https://public.kiotapi.com/orders",
+        "params": {}
+    },
+    "GetCustomerList": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/customers",
+        "params": {}
+    },
+    "GetCustomerDetailById": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/customers/{id}",
+        "params": {}
+    },
+    "GetCustomerDetailByCode": {
+        "method": "GET ",
+        "endpoint": "https://public.kiotapi.com/customers/code/{code}",
+        "params": {}
+    },
+    "AddCustomerInfo": {
+        "method": "POST",
+        "endpoint": "https://public.kiotapi.com/customers",
+        "params": {}
+    },
+    "UpdateCustomerInfo": {
+        "method": "PUT",
+        "endpoint": "https://public.kiotapi.com/customers/Id",
+        "params": {}
+    },
+    "DeleteCustomerInfo": {
+        "method": "DELETE",
+        "endpoint": "https://public.kiotapi.com/customers/{id}",
+        "params": {}
+    }
+}

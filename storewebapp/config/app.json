@@ -1,5 +1,6 @@
 {
     "host": "https://mystorewebapp.herokuapp.com/",
     "port": "8080",
-    "secret_key": "nhl^o9m3knne(9f2ytnz91*5)s()omjil4poc8=9#0wof!q)i5"
+    "secret_key": "nhl^o9m3knne(9f2ytnz91*5)s()omjil4poc8=9#0wof!q)i5",
+    "retailer": "kimikids"
 }
