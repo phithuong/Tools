@@ -30,7 +30,9 @@
             <div class="nav-group">
                 <nav class="nav-item">
                     <ul class="nav-item-group">
-                        <li><i class="fas fa-user fa-2x"></i></li>
+                        <li>
+                            <a href="{% url 'login' %}" class="fas fa-user fa-2x"></a>
+                        </li>
                         <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
                     </ul>
                 </nav>
@@ -458,14 +460,86 @@
                     <li><i class="fas fa-home fa-2x"></i></li>
                     <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
                     <li><i class="fab fa-facebook-messenger fa-2x"></i></li>
-                    <li><i class="fas fa-user fa-2x"></i></li>
+                    <li>
+                        <a href="{% url 'login' %}" class="fas fa-user fa-2x"></a>
+                    </li>
                 </ul>
             </div>
         </div>
     </footer>
+
+    <!-- <div class="fb-customerchat" page_id="104056044837930" minimized="true">
+    </div> -->
+
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/owl.carousel.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/app-custom.js' %}"></script>
 </body>
+
+<!-- <script>
+    var secret = 'cf3cd6465f347a2ff74b822720e3b4f7';
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '967360890417266',
+            cookie: true,
+            xfbml: true,
+            version: 'v8.0'
+        });
+
+        FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // FB.CustomerChat.show();
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+    }
+</script> -->
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v8.0'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat" attribution=setup_tool page_id="104056044837930">
+</div>
 
 </html>

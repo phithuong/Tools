@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Regist information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registUser.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign Up</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'regist_user' %}">
+                        {% csrf_token %}
+                        <!-- User Name -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text input-lbl input-lbl">User name:</span>
+                            </div>
+                            <input type="text" id="user_name" class="form-control" name="user_name" placeholder="your name" value="" required>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text input-lbl">Password:</span>
+                            </div>
+                            <input type="password" id="password" class="form-control" name="password" placeholder="your password" value="" required>
+                        </div>
+
+                        <!-- Facebook link -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text input-lbl">Facebook link</span>
+                            </div>
+                            <input type="text" id="fb_link" class="form-control" name="fb_link" placeholder="your facebook link" required>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text input-lbl">Gender:</span>
+                            </div>
+                            <select id="gender" name="gender" required>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Undefined</option>
+                            </select>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text input-lbl">Age:</span>
+                            </div>
+                            <input type="number" id="age" class="form-control" name="age">
+                        </div>
+
+                        <!-- Address -->
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text input-lbl">Address:</span>
+                            </div>
+                            <input type="text" id="address" class="form-control" name="address">
+                        </div>
+
+                        <!-- Submit form button -->
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Did you have an account?
+                        <a href="{% url 'login' %}">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

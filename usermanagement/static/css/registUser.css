@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+html,
+body {
+    background-image: url('../images/login_background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.card {
+    height: auto;
+    min-width: 540px;
+    max-width: 650px;
+    margin: 100px auto;
+}
+
+.input-lbl {
+    width: 25%;
+}

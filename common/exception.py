@@ -1,4 +1,4 @@
-class CustomException:
+class CustomException(Exception):
     def __init__(self, err_code, err_message):
         super().__init__()
         self.err_code = err_code

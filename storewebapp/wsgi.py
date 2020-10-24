@@ -11,6 +11,7 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
 
+os.environ['HTTPS'] = "on"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "storewebapp.settings")
 
 application = get_wsgi_application()
