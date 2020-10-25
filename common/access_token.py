@@ -9,7 +9,7 @@ class Token:
         with open(config_file_path) as f:
             config = json.load(f)
 
-        if config_file_path is not None:
+        if config is not None:
             self._config = config
             self._access_token_endpoint = config['endpoint']
             self._client_id = config['client_id']

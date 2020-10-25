@@ -40,7 +40,11 @@ class Api:
     def call(method, url, headers, payload):
         response = None
         try:
-            response = requests.request(method, url, headers = headers, data = payload)
+            if method == "POST":
+                response = requests.request(method, url, headers = headers, data = payload)
+            elif method == "GET":
+                response = requests.request(method, url, headers = headers, params = payload)
+
         except Exception as Ex:
             ex = CustomException(500, ReturnCode.get(500))
             return ex
@@ -48,11 +52,11 @@ class Api:
         return response
 
     # @Decorators.refresh_token
-    def get_product_list(self):
+    def get_product_list(self, currentItem=0, pageSize=20, includeInventory=True):
         method = self._api_list['GetProductList']['method']
         url = self._api_list['GetProductList']['endpoint']
 
-        payload = {}
+        payload = {'pageSize': pageSize, 'currentItem': currentItem, 'includeInventory': includeInventory}
         headers = {
             'Retailer': self._retailer,
             'Authorization': 'Bearer {:s}'.format(self._access_token),
@@ -60,7 +64,7 @@ class Api:
         }
 
         response = Api.call(method, url, headers, payload)
-        print(response.text.encode('utf8'))
+        return response.json()
 
     def get_category_list(self):
         method = self._api_list['GetCategoryList']['method']
@@ -73,4 +77,4 @@ class Api:
             'Cookie': 'ss-pid=UfGiMD5KsHKOq4wDnSAF; ss-id=MBzimQuGoorIlZCvurlL'
         }
         response = Api.call(method, url, headers, payload)
-        print(response.text.encode('utf8'))
+        return response.json()

@@ -12,7 +12,77 @@
     "GetProductList": {
         "method": "GET",
         "endpoint": "https://public.kiotapi.com/products",
-        "params": {}
+        "params": [{
+                "name": "orderBy",
+                "type": "str",
+                "default": ""
+            },
+            {
+                "name": "lastModifiedFrom",
+                "type": "datetime",
+                "default": ""
+            },
+            {
+                "name": "pageSize",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "currentItem",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "includeInventory",
+                "type": "boolean",
+                "default": ""
+            },
+            {
+                "name": "includePricebook",
+                "type": "boolean",
+                "default": ""
+            },
+            {
+                "name": "IncludeSerials",
+                "type": "boolean",
+                "default": ""
+            },
+            {
+                "name": "IncludeBatchExpires",
+                "type": "boolean",
+                "default": ""
+            },
+            {
+                "name": "masterUnitId",
+                "type": "long",
+                "default": ""
+            },
+            {
+                "name": "categoryId",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "orderDirection",
+                "type": "str",
+                "default": ""
+            },
+            {
+                "name": "includeRemoveIds",
+                "type": "boolean",
+                "default": ""
+            },
+            {
+                "name": "productType",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "includeMaterial",
+                "type": "boolean",
+                "default": ""
+            }
+        ]
     },
     "GetProductDetail": {
         "method": "GET",
