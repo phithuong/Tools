@@ -1,14 +1,16 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mystorewebapp</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> {% block head-import %} {% endblock %}
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap" rel="stylesheet">
+    {% block head-import %}
+    {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
@@ -19,7 +21,8 @@
                 <span><img class="logoImg" src="{% static 'images/mobile-logo2.png' %}"></img></span>
                 <h1><span style="color: #86bc42;">Vina</span> Mart</h1>
             </div>
-            {% block header-nav %} {% endblock %}
+            {% block header-nav %}
+            {% endblock %}
         </div>
         <div class="header-mobile-nav visible-mobile">
 
@@ -29,19 +32,20 @@
                     <span><img class="logoImg2" src="{% static 'images/mobile-logo2.png' %}"></img></span>
                     <h1><span style="color: #86bc42;">Việt</span> Mart</h1>
                 </div>
-                {% block header-mobile-nav %} {% endblock %}
+                {% block header-mobile-nav %}
+                {% endblock %}
             </nav>
         </div>
     </header>
     <div class="main-container">
-        {% block container %} {% endblock %}
+        {% block container %}
+        {% endblock %}
     </div>
     <footer>
         <div class="hidden-mobile">
             <div class="lorem-before-end-wrapper">
-                <p class="title-lorem">
-                    <span>How‘re we doing? Give us a feedback.</span><br><span>It’s very important to us to improve your experiences, many thanks for your contributions.</span>
-                </p>
+                {% block lorem %}
+                {% endblock %}
             </div>
             <div class="footer-wrapper">
                 <div class="footer-left-content">
@@ -63,9 +67,7 @@
                 <ul>
                     <li><i class="fas fa-home fa-2x"></i></li>
                     <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
-                    <li>
-                        <i class="fab fa-facebook-messenger fa-2x fb-customerchat" attribution=setup_tool page_id="104056044837930"></i>
-                    </li>
+                    <li><i class="fab fa-facebook-messenger fa-2x"></i></li>
                     <li>
                         <a href="{% url 'login' %}" class="fas fa-user fa-2x"></a>
                     </li>
@@ -97,7 +99,7 @@
 </script>
 
 <!-- Your Chat Plugin code -->
-<!-- <div class="fb-customerchat" attribution=setup_tool page_id="104056044837930">
-</div> -->
+<div class="fb-customerchat" attribution=setup_tool page_id="104056044837930">
+</div>
 
 </html>

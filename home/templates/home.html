@@ -1,6 +1,13 @@
-{% extends 'base.html' %} {% load static %} {% block head-import %}
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head-import %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.min.css' %}"> {% endblock %} {% block header-nav %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.min.css' %}">
+{% endblock %}
+
+{% block header-nav %}
 <div class="search-group">
     <div class="search-group-border">
         <input type="text" placeholder="Tên sản phầm tìm kiếm...">
@@ -17,34 +24,50 @@
         </ul>
     </nav>
 </div>
-{% endblock %} {% block header-mobile-nav %}
+{% endblock %}
+
+{% block header-mobile-nav %}
 <ul>
     <li><i class="fas fa-search fa-2x"></i></li>
     <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
 </ul>
-{% endblock %} {% block container %}
+{% endblock %}
+
+{% block container %}
 <section id="slide-1">
     <div class="home-slide owl-carousel owl-theme">
         <div class="item owl-slide item-bg-1">
             <div class="static-wrapper">
                 <div class="owl-slide-text">
-                    <h2 class="owl-slide-animated owl-slide-title">This is Side 1</h2>
+                    <h2 class="owl-slide-animated owl-slide-title">VinaMart Kurume</h2>
                 </div>
                 <div class="owl-slide-animated owl-slide-subtitle">
-                    <p>This is subtitle for slide 1</p>
+                    <p class="slide-subtitle">福岡県久留米市東町40―1小斉ビル2階<br/>(Fukuoka ken- Kurume Shi- Higashi machi 40-1 syousai biru 2F)<br/>Cách ga Nishitetsu Kurume 50m</p>
                 </div>
-                <a class="btn-slide owl-slide-animated owl-slide-cta" href="#" role="button">Fanpage</a>
+                <div class="div-fb-logo-telephone">
+                    <a class="owl-slide-animated owl-slide-cta" href="https://www.facebook.com/VINAMARTKURUME"><i class="fab fa-facebook">Vinamart Kurume</i></a>
+                    <div class="owl-slide-animated owl-slide-cta telephone-div">
+                        <i class="owl-slide-animated owl-slide-cta fas fa-phone-alt">(Hùng) 08092560564</i>
+                        <i class="owl-slide-animated owl-slide-cta fas fa-phone-alt">(Hà) 07042848288</i>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="item owl-slide">
-            <div class="static-wrapper">
+        <div class="item owl-slide item-bg-2">
+            <div class="static-wrapper right-side">
                 <div class="owl-slide-text">
-                    <h2 class="owl-slide-animated owl-slide-title">This is Side 2</h2>
+                    <h2 class="owl-slide-animated owl-slide-title">VinaMart Kurume</h2>
                 </div>
                 <div class="owl-slide-animated owl-slide-subtitle">
-                    <p>This is subtitle for slide 2</p>
+                    <p class="slide-subtitle">福岡県久留米市東町40―1小斉ビル2階<br/>(Fukuoka ken- Kurume Shi- Higashi machi 40-1 syousai biru 2F)<br/>Cách ga Nishitetsu Kurume 50m</p>
                 </div>
-                <a class="btn-slide owl-slide-animated owl-slide-cta" href="#" role="button">Fanpage</a>
+                <div class="div-fb-logo-telephone right-side">
+                    <a class="owl-slide-animated owl-slide-cta" href="https://www.facebook.com/VINAMARTKURUME"><i class="fab fa-facebook">Vinamart Kurume</i></a>
+                    <div class="owl-slide-animated owl-slide-cta telephone-div">
+                        <i class="owl-slide-animated owl-slide-cta fas fa-phone-alt">(Hùng) 08092560564</i>
+                        <i class="owl-slide-animated owl-slide-cta fas fa-phone-alt">(Hà) 07042848288</i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -122,10 +145,20 @@
                 {% endfor %}
             </ul>
         </div>
-        {% endif %} {% endfor %}
+        {% endif %}
+        {% endfor %}
+        
     </div>
 </section>
-{% endblock %} {% block js-import %}
+{% endblock %}
+{% block lorem %}
+<p class="title-lorem">
+    <span>Cửa hàng chúng tôi có đáp ứng được nhu cầu của bạn không?.</span><br><span>Hãy gửi cho chúng tôi sản phẩm các bạn mong muốn. Góp ý của các bạn sẽ giúp chúng tôi phục vụ tốt hơn.</span>
+</p>
+{% endblock %}
+                
+
+{% block js-import %}
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/owl.carousel.js' %}"></script>
 {% endblock %}

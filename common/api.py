@@ -59,8 +59,7 @@ class Api:
         payload = {'pageSize': pageSize, 'currentItem': currentItem, 'includeInventory': includeInventory}
         headers = {
             'Retailer': self._retailer,
-            'Authorization': 'Bearer {:s}'.format(self._access_token),
-            'Cookie': 'ss-pid=UfGiMD5KsHKOq4wDnSAF; ss-id=MBzimQuGoorIlZCvurlL'
+            'Authorization': 'Bearer {:s}'.format(self._access_token)
         }
 
         response = Api.call(method, url, headers, payload)
@@ -73,8 +72,7 @@ class Api:
         payload = {}
         headers = {
             'Retailer': self._retailer,
-            'Authorization': 'Bearer {:s}'.format(self._access_token),
-            'Cookie': 'ss-pid=UfGiMD5KsHKOq4wDnSAF; ss-id=MBzimQuGoorIlZCvurlL'
+            'Authorization': 'Bearer {:s}'.format(self._access_token)
         }
         response = Api.call(method, url, headers, payload)
         return response.json()

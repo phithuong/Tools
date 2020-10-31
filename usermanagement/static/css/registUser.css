@@ -1,19 +1,42 @@
-@import url('https://fonts.googleapis.com/css?family=Numans');
-html,
-body {
-    background-image: url('../images/login_background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
+.input-group {
+  margin-top: 0.375rem;
+  position: relative;
 }
 
-.card {
-    height: auto;
-    min-width: 540px;
-    max-width: 650px;
-    margin: 100px auto;
+.input-group input {
+  padding-top: 1rem;
 }
 
-.input-lbl {
-    width: 25%;
+.input-group label {
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
 }
+
+.form-group {
+  margin-top: 0.75rem;
+}
+
+.form-label .content-name {
+  position: absolute;
+  bottom: 0.5rem;
+  width: 100%;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none !important;
+}
+
+.input-group input:focus + .form-label .content-name,
+.input-group input:valid + .form-label .content-name {
+  -webkit-transform: translateY(-150%);
+          transform: translateY(-150%);
+  font-size: 0.6rem;
+  color: #86bc42;
+}
+/*# sourceMappingURL=registUser.css.map */

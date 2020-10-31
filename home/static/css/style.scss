@@ -5,6 +5,7 @@
 }
 html {
   font-size: 62, 5%;
+  font-family: "Noto Sans TC", sans-serif;
 }
 
 header,
@@ -51,12 +52,13 @@ header {
   align-items: center;
 }
 .nav-mobile-group {
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 .logo-group {
   flex: 1;
 }
 .logo-mobile-group {
+  margin-left: 0.75rem;
   height: 100%;
 }
 
@@ -122,7 +124,7 @@ ul li {
 .cart-item {
   background-color: red;
   border-radius: 50%;
-  min-width: 1.5rem;
+  min-width: 1.8rem;
   font-weight: 600;
   color: white;
   text-align: center;
@@ -141,6 +143,14 @@ ul li {
   justify-content: start;
   align-items: center;
 }
+
+.item-bg-1 {
+  background-image: url(../images/bg-2.png);
+}
+.item-bg-2 {
+  background-image: url(../images/bg-1.png);
+}
+
 .owl-carousel .owl-slide {
   position: relative;
   height: 40vh;
@@ -149,10 +159,12 @@ ul li {
 .static-wrapper {
   position: static;
   width: 60%;
-  margin: 3rem auto 5rem auto;
+  margin: 2.6rem auto auto auto;
+  line-height: 1.5;
 }
+
 .owl-carousel .owl-slide-animated {
-  transform: translateX(2rem);
+  transform: translateY(2rem);
   opacity: 0;
   visibility: hidden;
   transition: all 0.05s;
@@ -232,6 +244,24 @@ ul li {
   font-size: 0.8rem;
   text-transform: capitalize;
 }
+.slide-subtitle {
+  // font-size: 1.5rem;
+  font-weight: 600;
+}
+.div-fb-logo-telephone {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  .telephone-div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.right-side {
+  text-align: right;
+  float: right;
+  // flex-direction: row-reverse;
+}
 // end slide-2
 // product area
 .product-area {
@@ -286,6 +316,7 @@ ul li {
     display: flex;
     justify-content: flex-start;
     flex: 1.5;
+    text-align: left;
   }
 
   .item-price {
@@ -348,7 +379,7 @@ ul li {
   p::before {
     content: "";
     display: block;
-    background: url(/img/line-slider.png) center no-repeat;
+    background: url(../images/line-slider.png) center no-repeat;
     position: absolute;
     bottom: -0.5rem;
     left: 50%;
@@ -404,7 +435,16 @@ ul li {
     position: fixed;
     overflow: hidden;
   }
-
+  .static-wrapper {
+    width: 90%;
+  }
+  .owl-slide-subtitle {
+    white-space: nowrap;
+  }
+  .div-fb-logo-telephone {
+    width: 100%;
+    white-space: nowrap;
+  }
   .main-container {
     overflow: auto;
   }
@@ -443,5 +483,10 @@ ul li {
   }
   .product-area {
     margin-bottom: 3.5rem;
+  }
+}
+@media only screen and (max-width: 385px) {
+  .logo-mobile-group > h1 {
+    font-size: 1.3rem;
   }
 }
