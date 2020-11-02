@@ -68,7 +68,7 @@ def login(request):
 
 
 @csrf_exempt
-def registUser(request):
+def regist_user(request):
     if request.method == 'POST':
         try:
             # create a form instance and populate it with data from the request:
@@ -86,7 +86,7 @@ def registUser(request):
 
             try:
                 user = User.objects.get(user_name=user_name)
-                return render(request, 'registUser.html')
+                return render(request, 'regist_user.html')
             except Exception as Ex:
                 print('no user')
 
@@ -100,7 +100,7 @@ def registUser(request):
 
         except Exception as Ex:
             print(Ex)
-            return render(request, 'registUser.html')
+            return render(request, 'regist_user.html')
 
         # check whether it's valid:
         # if form.is_valid():
@@ -113,7 +113,7 @@ def registUser(request):
         #     salt = user_name
         # user = User.objects.get(user_name=user_name)
         # if user:
-        #     return render(request, 'registUser.html')
+        #     return render(request, 'regist_user.html')
 
         # # salt = user_name
         # encyption_info = Encyption.encypt(password, None)
@@ -123,9 +123,9 @@ def registUser(request):
         # user.publish()
 
         # else:
-        #     return render(request, 'registUser.html')
+        #     return render(request, 'regist_user.html')
 
         return redirect('home')
 
     elif request.method == 'GET':
-        return render(request, 'registUser.html')
+        return render(request, 'regist_user.html')

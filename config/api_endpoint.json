@@ -2,12 +2,12 @@
     "GetCategoryList": {
         "method": "GET",
         "endpoint": "https://public.kiotapi.com/categories",
-        "params": {}
+        "params": []
     },
     "GetCategoryDetail": {
         "method": "GET",
         "endpoint": "https://public.kiotapi.com/categories{id}",
-        "params": {}
+        "params": []
     },
     "GetProductList": {
         "method": "GET",
@@ -87,41 +87,330 @@
     "GetProductDetail": {
         "method": "GET",
         "endpoint": "https://public.kiotapi.com/products{id}",
-        "params": {}
+        "params": []
     },
     "AddOrder": {
         "method": "POST",
         "endpoint": "https://public.kiotapi.com/orders",
-        "params": {}
+        "params": [{
+                "name": "purchaseDate",
+                "type": "datetime",
+                "default": ""
+            },
+            {
+                "name": "branchId",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "soldById",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "cashierId",
+                "type": "long",
+                "default": ""
+            },
+            {
+                "name": "discount",
+                "type": "decimal",
+                "default": ""
+            },
+            {
+                "name": "description",
+                "type": "str",
+                "default": ""
+            },
+            {
+                "name": "method",
+                "type": "str",
+                "default": ""
+            },
+            {
+                "name": "totalPayment",
+                "type": "decimal",
+                "default": ""
+            },
+            {
+                "name": "accountId",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "makeInvoice",
+                "type": "bool",
+                "default": ""
+            },
+            {
+                "name": "saleChannelId",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "orderDetails",
+                "type": "list",
+                "default": "",
+                "child1": [{
+                        "name": "productId",
+                        "type": "long",
+                        "default": ""
+                    },
+                    {
+                        "name": "productCode",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "productName",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "quantity",
+                        "type": "double",
+                        "default": ""
+                    },
+                    {
+                        "name": "price",
+                        "type": "decimal",
+                        "default": ""
+                    },
+                    {
+                        "name": "discount",
+                        "type": "decimal",
+                        "default": ""
+                    },
+                    {
+                        "name": "discountRatio",
+                        "type": "double",
+                        "default": ""
+                    }
+                ]
+            },
+            {
+                "name": "orderDelivery",
+                "type": "dict",
+                "default": "",
+                "child1": [{
+                        "name": "deliveryCode",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "type",
+                        "type": "byte",
+                        "default": ""
+                    },
+                    {
+                        "name": "price",
+                        "type": "decimal",
+                        "default": ""
+                    },
+                    {
+                        "name": "receiver",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "contactNumber",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "address",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "locationId",
+                        "type": "int",
+                        "default": ""
+                    },
+                    {
+                        "name": "locationName",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "weight",
+                        "type": "double",
+                        "default": ""
+                    },
+                    {
+                        "name": "length",
+                        "type": "double",
+                        "default": ""
+                    },
+                    {
+                        "name": "partnerDeliveryId",
+                        "type": "long",
+                        "default": "",
+                        "child2": [{
+                                "name": "code",
+                                "type": "str",
+                                "default": ""
+                            },
+                            {
+                                "name": "name",
+                                "type": "str",
+                                "default": ""
+                            },
+                            {
+                                "name": "address",
+                                "type": "str",
+                                "default": ""
+                            },
+                            {
+                                "name": "contactNumber",
+                                "type": "str",
+                                "default": ""
+                            },
+                            {
+                                "name": "email",
+                                "type": "str",
+                                "default": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "customer",
+                "type": "dict",
+                "default": "",
+                "child1": [{
+                        "name": "id",
+                        "type": "long",
+                        "default": ""
+                    },
+                    {
+                        "name": "code",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "name",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "gender",
+                        "type": "boolean",
+                        "default": ""
+                    },
+                    {
+                        "name": "birthDate",
+                        "type": "datetime",
+                        "default": ""
+                    },
+                    {
+                        "name": "contactNumber",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "address",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "email",
+                        "type": "str",
+                        "default": ""
+                    },
+                    {
+                        "name": "comment",
+                        "type": "str",
+                        "default": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "UpdateOrder": {
+        "method": "POST",
+        "endpoint": "https://public.kiotapi.com/orders",
+        "params": []
     },
     "GetCustomerList": {
         "method": "GET",
         "endpoint": "https://public.kiotapi.com/customers",
-        "params": {}
+        "params": []
     },
     "GetCustomerDetailById": {
         "method": "GET",
         "endpoint": "https://public.kiotapi.com/customers/{id}",
-        "params": {}
+        "params": []
     },
     "GetCustomerDetailByCode": {
         "method": "GET ",
         "endpoint": "https://public.kiotapi.com/customers/code/{code}",
-        "params": {}
+        "params": []
     },
     "AddCustomerInfo": {
         "method": "POST",
         "endpoint": "https://public.kiotapi.com/customers",
-        "params": {}
+        "params": [{
+                "name": "id",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "id",
+                "type": "int",
+                "default": ""
+            }
+        ]
     },
     "UpdateCustomerInfo": {
         "method": "PUT",
         "endpoint": "https://public.kiotapi.com/customers/Id",
-        "params": {}
+        "params": []
     },
     "DeleteCustomerInfo": {
         "method": "DELETE",
         "endpoint": "https://public.kiotapi.com/customers/{id}",
-        "params": {}
+        "params": []
+    },
+    "GetUserList": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/users",
+        "params": []
+    },
+    "GetBranchList": {
+        "method": "GET",
+        "endpoint": "https://public.kiotapi.com/branches",
+        "params": [{
+                "name": "lastModifiedFrom",
+                "type": "datetime",
+                "default": ""
+            },
+            {
+                "name": "pageSize",
+                "type": "int",
+                "default": 20
+            },
+            {
+                "name": "currentItem",
+                "type": "int",
+                "default": ""
+            },
+            {
+                "name": "orderBy",
+                "type": "str",
+                "default": ""
+            },
+            {
+                "name": "orderDirection",
+                "type": "string",
+                "default": "Asc"
+            },
+            {
+                "name": "includeRemoveIds",
+                "type": "boolean",
+                "default": "str"
+            }
+        ]
     }
 }

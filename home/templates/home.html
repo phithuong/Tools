@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block head-import %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.min.css' %}">
@@ -20,7 +19,7 @@
             <li>
                 <a href="{% url 'login' %}" class="fas fa-user fa-2x"></a>
             </li>
-            <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
+            <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
         </ul>
     </nav>
 </div>
@@ -29,7 +28,7 @@
 {% block header-mobile-nav %}
 <ul>
     <li><i class="fas fa-search fa-2x"></i></li>
-    <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
+    <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
 </ul>
 {% endblock %}
 
@@ -53,6 +52,7 @@
                 </div>
             </div>
         </div>
+
         <div class="item owl-slide item-bg-2">
             <div class="static-wrapper right-side">
                 <div class="owl-slide-text">
@@ -71,8 +71,8 @@
             </div>
         </div>
     </div>
-    <!-- end slide-1 -->
-</section>
+</section> <!-- end slide-1 -->
+
 <section id="slide-2">
     <div class="wrapper-slide-2">
         <ul class="slide-2-ul">
@@ -111,54 +111,60 @@
             </li>
         </ul>
     </div>
-</section>
+</section> <!-- end slide-2 -->
+
+<!-- section category alongside product -->
 <section class="product-area">
     <div class="product-area-text">
         <h2><span>Sản phẩm của cửa hàng</span></h2>
     </div>
-    <div class="product-are-container">
-        {% for key, value in data.items %} {% if value %}
-        <div class="category-wrapper">
-            <div class="category-header">
-                <h1>{{ key }}</h1>
-            </div>
 
-            <ul class="category-items">
+    <div class="product-are-container">
+    {% for key, value in data.items %}
+        {% if value %}
+
+            <div class="category-wrapper">
+                <!-- Show category name-->
+                <div class="category-header">
+                    <h1>{{ key }}</h1>
+                </div>
+
+                <!-- Show product belong to category -->
+                <ul class="category-items">
                 {% for item in value %}
-                <li class="item-wrapper">
-                    <div class="item-row-1">
-                        <div class="item-title">
-                            <h3>{{ item.fullName }}</h3>
-                            <div class="item-subtitle-wrapper">
-                                <i class="fas fa-calculator">1  {{ item.unit }}</i>
-                                <i class="fas fa-box-open">{{ item.inventory }}</i>
+                    <li class="item-wrapper">
+                        <div class="item-row-1">
+                            <div class="item-title">
+                                <h3>{{ item.fullName }}</h3>
+                                <div class="item-subtitle-wrapper">
+                                    <i class="fas fa-calculator">1  {{ item.unit }}</i>
+                                    <i class="fas fa-box-open">{{ item.inventory }}</i>
+                                </div>
+                            </div>
+                            <div class="item-price">
+                                <span>{{ item.price }}¥</span>
+                            </div>
+                            <div class="item-order">
+                                <i class="zmdi zmdi-shopping-cart-plus"></i>
                             </div>
                         </div>
-                        <div class="item-price">
-                            <span>{{ item.price }}¥</span>
-                        </div>
-                        <div class="item-order">
-                            <i class="zmdi zmdi-shopping-cart-plus"></i>
-                        </div>
-                    </div>
-                </li>
+                    </li>
                 {% endfor %}
-            </ul>
-        </div>
+                </ul> <!-- end of category -->
+            </div>
         {% endif %}
-        {% endfor %}
-        
+    {% endfor %}
     </div>
 </section>
 {% endblock %}
+
 {% block lorem %}
 <p class="title-lorem">
     <span>Cửa hàng chúng tôi có đáp ứng được nhu cầu của bạn không?.</span><br><span>Hãy gửi cho chúng tôi sản phẩm các bạn mong muốn. Góp ý của các bạn sẽ giúp chúng tôi phục vụ tốt hơn.</span>
 </p>
 {% endblock %}
-                
 
 {% block js-import %}
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/owl.carousel.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/app-custom.js' %}"></script>
 {% endblock %}

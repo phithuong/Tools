@@ -1,51 +1,57 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mystorewebapp</title>
+
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap" rel="stylesheet">
-    {% block head-import %}
-    {% endblock %}
+    {% block head-import %} {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
+    <!-- Header -->
     <header>
+        <!-- Navigation is visible on web mode -->
         <div class="header-nav hidden-mobile">
             <div class="logo-group">
-                <span><img class="logoImg" src="{% static 'images/mobile-logo2.png' %}"></img></span>
+                <span><a href="{% url 'home' %}"><img class="logoImg" src="{% static 'images/mobile-logo2.png' %}"></img></a></span>
                 <h1><span style="color: #86bc42;">Vina</span> Mart</h1>
             </div>
-            {% block header-nav %}
-            {% endblock %}
+            {% block header-nav %} {% endblock %}
         </div>
-        <div class="header-mobile-nav visible-mobile">
 
+        <!-- Navigation is visible on mobile mode -->
+        <div class="header-mobile-nav visible-mobile">
             <nav class="nav-mobile-group">
                 <div class="mobile-humberger"><i class="fas fa-bars fa-2x"></i></div>
                 <div class="logo-mobile-group">
                     <span><img class="logoImg2" src="{% static 'images/mobile-logo2.png' %}"></img></span>
                     <h1><span style="color: #86bc42;">Việt</span> Mart</h1>
                 </div>
-                {% block header-mobile-nav %}
-                {% endblock %}
+                {% block header-mobile-nav %} {% endblock %}
             </nav>
         </div>
     </header>
+
+    <!-- Main content -->
     <div class="main-container">
-        {% block container %}
-        {% endblock %}
+        {% block container %} {% endblock %}
     </div>
+
+    <!-- Footer -->
     <footer>
+
+        <!-- Contact information -->
         <div class="hidden-mobile">
             <div class="lorem-before-end-wrapper">
-                {% block lorem %}
-                {% endblock %}
+                {% block lorem %} {% endblock %}
             </div>
             <div class="footer-wrapper">
                 <div class="footer-left-content">
@@ -62,11 +68,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- Visible on mobile mode -->
         <div class="visible-mobile">
             <div class="footer-mobile-bar">
                 <ul>
-                    <li><i class="fas fa-home fa-2x"></i></li>
-                    <li class="li-cart"><i class="cart-icon fas fa-shopping-cart fa-2x"></i><span class="cart-item">0</span></li>
+                    <li><a href="{% url 'home' %}" class="fas fa-home fa-2x"></a></li>
+                    <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
                     <li><i class="fab fa-facebook-messenger fa-2x"></i></li>
                     <li>
                         <a href="{% url 'login' %}" class="fas fa-user fa-2x"></a>
@@ -76,30 +84,15 @@
         </div>
     </footer>
 
+    <!-- Chat Plugin -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="104056044837930">
+    </div>
+
+    <!-- JS import -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/fb_messenger.js' %}"></script>
     {% block js-import %} {% endblock %}
-    <script type="text/javascript" src="{% static 'js/app-custom.js' %}"></script>
+
 </body>
-
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml: true,
-            version: 'v8.0'
-        });
-    };
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<!-- Your Chat Plugin code -->
-<div class="fb-customerchat" attribution=setup_tool page_id="104056044837930">
-</div>
 
 </html>

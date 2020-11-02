@@ -4,7 +4,7 @@
 
 {% block head-import %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/registUser.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/regist_user.css' %}">
 {% endblock %}
 
 {% block container %}
@@ -13,33 +13,37 @@
         <div class="login">
             <div class="login-header">
                 <h3>Đăng ký tài khoản</h3>
-                <!-- <div class="login-header-social-icon">
-                    <span><i class="fab fa-facebook-square fa-2x"></i></span>
-                    <span><i class="fab fa-google-plus-square fa-2x"></i></span>
-                    <span><i class="fab fa-twitter-square fa-2x"></i></span>
-                </div> -->
             </div>
+
             <div class="login-body">
                 <form method="POST" action="{% url 'regist_user' %}">
                     {% csrf_token %}
+
+                    <!-- Email -->
                     <div class="userInput">
                         <div class="input-group"> 
                             <input name="email" autocomplete="off" type="email" class="form-control" required>
                             <label class="form-label"><span class="content-name">Địa chỉ email</span></label> 
                         </div> 
                     </div>
+
+                    <!-- Password -->
                     <div class="userInput">
                         <div class="input-group"> 
                             <input name="password" autocomplete="off" type="password" class="form-control" required>
                             <label class="form-label"><span class="content-name">Mật khẩu</span></label> 
                         </div> 
                     </div>
+
+                    <!-- Confirm password -->
                     <div class="userInput">
                         <div class="input-group"> 
                             <input name="re-password" autocomplete="off" type="password" class="form-control" required>
                             <label class="form-label"><span class="content-name">Xác nhận lại mật khẩu</span></label> 
                         </div> 
                     </div>
+
+                    <!-- Button submit -->
                     <div class="form-group">
                         <input type="submit" value="Đăng ký" id="btnSignUp" class="btn float-right login_btn">
                     </div>
