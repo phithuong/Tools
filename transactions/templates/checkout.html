@@ -23,7 +23,7 @@
                         <label class="form-label"><span class="content-name">Địa chỉ email</span></label> 
                     </div> 
                     <div class="input-group"> 
-                        <input name="tele-phone" autocomplete="off" type="text" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                        <input id="tele-phone" name="tele-phone" autocomplete="off" type="text" class="form-control" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
                         <label class="form-label"><span class="content-name">Số điện thoại</span></label>
                     </div> 
                     <div class="input-group"> 
@@ -130,10 +130,32 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
-                                <td>1 Kg</td>
-                                <td class="products-unit-cell"><i class="fas fa-minus"></i><input type="number" class="form-control" value="100" min="1" disabled><i class="fas fa-plus"></i></td>
-                                <td>2000¥</td>
+                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
+                                <td class="products-unit-cell">1 Kg</td>
+                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
+                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
+                                <td class="products-price-cell">2000¥</td>
+                            </tr>
+                            <tr>
+                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
+                                <td class="products-unit-cell">1 Kg</td>
+                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
+                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
+                                <td class="products-price-cell">2000¥</td>
+                            </tr>
+                            <tr>
+                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
+                                <td class="products-unit-cell">1 Kg</td>
+                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
+                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
+                                <td class="products-price-cell">2000¥</td>
+                            </tr>
+                            <tr>
+                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
+                                <td class="products-unit-cell">1 Kg</td>
+                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
+                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
+                                <td class="products-price-cell">2000¥</td>
                             </tr>
                         </tbody>
                     </table>
@@ -145,6 +167,6 @@
 {% endblock %}
 
 {% block js-import %}
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.4.3.js" integrity="sha256-DjMDo6DOyV68jDzD4Z/HHJlIf6ooawXQGj64zKTZC8c=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{% static 'js/checkOut.js' %}"></script>
 {% endblock %}

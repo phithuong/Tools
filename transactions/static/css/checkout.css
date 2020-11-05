@@ -140,17 +140,32 @@ textarea:focus {
   width: 100%;
 }
 
-.bill-info .fa-trash-alt {
-  margin-right: 0.35rem;
+.bill-info tbody td span {
+  width: 45%;
+  text-align: center;
+  padding: 0.15rem;
 }
 
-.bill-info .products-unit-cell {
+.bill-info .fa-trash-alt {
+  margin-right: 0.35rem;
+  cursor: pointer;
+}
+
+.bill-info .products-number-cell {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.bill-info .products-number-cell .fa-minus,
+.bill-info .products-number-cell .fa-plus {
+  padding: 0.25rem;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

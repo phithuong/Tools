@@ -1,10 +1,21 @@
-$(".numeric").keydown(function(e){
-    console.log(e);
+$(".fa-minus").click(function(e){
+    let number = e.target.nextSibling.innerHTML;
+    if (Number(number) > 1){
+        e.target.nextSibling.innerHTML = String(Number(number) - 1);
+    }
 });
-
-function keyAbc(){
-    $(".tele-phone").keydown(function (e) {
-        console.log(e);
+$(".fa-plus").click(function(e){
+    // let number = document.getElementById("product-numbers").innerHTML;
+    let number = e.target.previousSibling.innerHTML;
+    e.target.previousSibling.innerHTML = String(Number(number) + 1);
+});
+$(".fa-trash-alt").click(function(e){
+    let tableRow = e.target.parentElement.parentElement;
+    tableRow.remove();
+});
+function checkPhoneNumber(){
+    $("#tele-phone").keydown(function (e) {
+        console.log(e.keyCode);
         // Allow: backspace, delete, tab, escape, enter
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
              // Allow: Ctrl+A, Command+A
@@ -19,7 +30,7 @@ function keyAbc(){
             e.preventDefault();
         }
     });
-    $(".tele-phone").keyup(function(e) {  
+    $("#tele-phone").keyup(function(e) {  
     	var numericvalue = $(this); 
     	var position = getCursorPosition(numericvalue);
         if (// Allow: Ctrl+A, Command+A
@@ -35,13 +46,15 @@ function keyAbc(){
 
         if(digits.length > 2){
             res = digits.substring(0, 3);
-            result = "(" + res + ") ";
+            // result = "(" + res + ") ";
+            result = res + "-";
             res = digits.substring(3);
         	result = result + res;
         	
             if(digits.length > 6){
                 res = digits.substring(0, 3);
-                result = "(" + res + ") ";
+                // result = "(" + res + ") ";
+                result = res + "-";
             	res = digits.substring(3,6);
             	result = result + res + "-";
             	res = digits.substring(6);
@@ -89,7 +102,7 @@ function getCursorPosition (numericvalue) {
             pos = el.selectionStart;
         return pos;
 }
-keyAbc();
+checkPhoneNumber();
 
 var radiosPayments = document.getElementsByName('choice-payments');
 var bankInfo = document.querySelector('.bank-infor');
