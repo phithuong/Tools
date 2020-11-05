@@ -14,6 +14,7 @@ APP_CONFIG_PATH = os.path.join(WRK_DIR, 'config/app.json')
 sys.path.append(WRK_DIR)
 from common.access_token import Token
 from common.api import Api
+from common.session import get_session
 
 
 def home(request):
@@ -82,4 +83,8 @@ def home(request):
         # Add to list product of category
         data[categoryName].append(productInfo)
 
-    return render(request, 'home.html', {'data': data})
+    # Get user name
+    user_name = get_session(request, 'user_name')
+
+    response = render(request, 'home.html', {'data': data, 'user_name': user_name})
+    return response

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
+from django.core.exceptions import ObjectDoesNotExist
 
 import os
 import sys
@@ -15,11 +16,12 @@ APP_CONFIG_PATH = os.path.join(WRK_DIR, 'config/app.json')
 sys.path.append(WRK_DIR)
 from common.access_token import Token
 from common.api import Api
-from .forms import LoginForm, UserForm
+from .forms import UserLoginForm, UserRegistForm
 from .models import User
 from common.encryption import Encyption
 from common.exception import CustomException
 from common.constants import ReturnCode
+from common.session import save_session, get_session
 
 
 @csrf_exempt
@@ -27,38 +29,38 @@ def login(request):
     if request.method == 'POST':
         try:
             # create a form instance and populate it with data from the request:
-            form = LoginForm(request.POST or None, request.FILES or None)
-            print(request.POST)
+            user_form = UserLoginForm(data=request.POST or None, files=request.FILES or None)
 
-            user_name = request.POST.get('user_name')
-            password = request.POST.get('password')
+            # check whether it's valid:
+            if user_form.is_valid():
+                user_form = user_form.cleaned_data
+                user_name = user_form['user_name']
+                password = user_form['password']
 
-            # Check exists user in db
-            user = User.objects.get(user_name=user_name)
+                # Check exists user in db
+                user = None
+                try:
+                    user = User.objects.get(user_name=user_name)
 
-            # Check mapping password
-            salt = user.salt
-            print(salt)
-            encyption_info = Encyption.encypt(password, salt)
-            if encyption_info['key'] == user.password:
-                return redirect('home')
+                # Case user don't exists
+                except ObjectDoesNotExist as Ex:
+                    return render(request, 'login.html')
 
-            # # check whether it's valid:
-            # if form.is_valid():
-            #     # user_name = form.user_name
-            #     # password = form.password
+                # Case other exception
+                except Exception as Ex:
+                    return render(request, 'login.html')
 
-            #     # Check exists user in db
-            #     user = User.objects.get(user_name=user_name)
+                # Check mapping password
+                salt = user.salt
+                encyption_info = Encyption.encypt(password, salt)
+                if encyption_info['key'] != user.password:
+                    raise CustomException(500, 'Password is incorrect.')
 
-            #     # Check mapping password
-            #     salt = user.salt
-            #     encyption_info = Encyption.encypt(user_name, salt)
-            #     if encyption_info['key'] == user.password:
-            #         return redirect('home')
+            else:
+                return render(request, 'login.html')
 
-            # else:
-            #     raise Exception()
+            save_session(request, user_name=user_name)
+            return redirect('home')
 
         except Exception as Ex:
             return render(request, 'login.html')
@@ -72,59 +74,36 @@ def regist_user(request):
     if request.method == 'POST':
         try:
             # create a form instance and populate it with data from the request:
-            form = UserForm(request.POST or None, request.FILES or None)
-            print(request.POST)
+            user_form = UserRegistForm(data=request.POST or None, files=request.FILES or None)
 
-            user_name = request.POST.get('user_name')
-            password = request.POST.get('password')
-            fb_link = request.POST.get('fb_link')
-            gender = request.POST.get('gender')
-            age = request.POST.get('age')
-            if age == '':
-                age = None
-            address = request.POST.get('address')
+            if user_form.is_valid():
+                user_form = user_form.cleaned_data
+                user_name = user_form.get('user_name')
+                password = user_form.get('password')
+                email = user_form.get('email')
+                fb_link = user_form.get('fb_link', None)
 
-            try:
-                user = User.objects.get(user_name=user_name)
-                return render(request, 'regist_user.html')
-            except Exception as Ex:
-                print('no user')
+                user = None
+                try:
+                    user = User.objects.get(user_name=user_name)
+                except ObjectDoesNotExist as Ex:
+                    pass
+                else:
+                    if user is not None:
+                        return render(request, 'regist_user.html')
 
-            # salt = user_name
-            salt = user_name
-            encyption_info = Encyption.encypt(password, salt)
+                # salt = user_name
+                salt = user_name
+                encyption_info = Encyption.encypt(password, salt)
 
-            user = User(user_name=user_name, password=encyption_info['key'], fb_link=fb_link,
-                        gender=gender, age=age, address=address, salt=encyption_info['salt'])
-            user.publish()
+                user = User(user_name=user_name, password=encyption_info['key'], email=email,
+                            fb_link=fb_link, salt=encyption_info['salt'])
+                user.publish()
 
         except Exception as Ex:
-            print(Ex)
             return render(request, 'regist_user.html')
 
-        # check whether it's valid:
-        # if form.is_valid():
-        #     user_name = form.user_name
-        #     password = form.password
-        #     fb_link = form.fb_link
-        #     gender = form.gender
-        #     age = form.age
-        #     address = form.address
-        #     salt = user_name
-        # user = User.objects.get(user_name=user_name)
-        # if user:
-        #     return render(request, 'regist_user.html')
-
-        # # salt = user_name
-        # encyption_info = Encyption.encypt(password, None)
-
-        # user = User(user_name=user_name, password=encyption_info['key'], fb_link=fb_link,
-        #             salt=encyption_info['salt'])
-        # user.publish()
-
-        # else:
-        #     return render(request, 'regist_user.html')
-
+        save_session(request, user_name=user_name)
         return redirect('home')
 
     elif request.method == 'GET':

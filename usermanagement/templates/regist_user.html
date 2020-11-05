@@ -19,6 +19,14 @@
                 <form method="POST" action="{% url 'regist_user' %}">
                     {% csrf_token %}
 
+                    <!-- UserName -->
+                    <div class="userInput">
+                        <div class="input-group"> 
+                            <input name="user_name" autocomplete="off" type="text" class="form-control" required>
+                            <label class="form-label"><span class="content-name">Tên đăng nhập</span></label>
+                        </div>
+                    </div>
+
                     <!-- Email -->
                     <div class="userInput">
                         <div class="input-group"> 
@@ -38,7 +46,7 @@
                     <!-- Confirm password -->
                     <div class="userInput">
                         <div class="input-group"> 
-                            <input name="re-password" autocomplete="off" type="password" class="form-control" required>
+                            <input name="re_password" autocomplete="off" type="password" class="form-control" required>
                             <label class="form-label"><span class="content-name">Xác nhận lại mật khẩu</span></label> 
                         </div> 
                     </div>

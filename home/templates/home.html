@@ -16,9 +16,11 @@
 <div class="nav-group">
     <nav class="nav-item">
         <ul class="nav-item-group">
-            <li>
-                <a href="{% url 'login' %}" class="fas fa-user fa-2x"></a>
-            </li>
+            {% if user_name %}
+                <li><span>{{ user_name }}</span></li>
+            {% else %}
+                <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
+            {% endif %}
             <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
         </ul>
     </nav>
@@ -27,7 +29,11 @@
 
 {% block header-mobile-nav %}
 <ul>
-    <li><i class="fas fa-search fa-2x"></i></li>
+    {% if user_name %}
+        <li><span>{{ user_name }}</span></li>
+    {% else %}
+        <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
+    {% endif %}
     <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
 </ul>
 {% endblock %}

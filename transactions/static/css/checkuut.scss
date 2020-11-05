@@ -1,0 +1,142 @@
+.container-wrapper {
+  //   display: inline-block; /* stops block being split across columns. Could use break-inside: avoid for modern browsers; */
+  width: 95%;
+  break-inside: avoid;
+  //   text-align: center;
+  margin: 0.75rem 0rem;
+  border: 0.1rem solid #e2e2e2;
+  border-radius: 0.3rem;
+}
+.container-header {
+  font-size: 1rem;
+  background-color: #f7f7f7;
+  padding: 0.5rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  h1 {
+    margin-left: 0.35rem;
+    span {
+      margin: 0.5rem auto;
+      padding: 0 0.35rem;
+      background-color: #86bc42;
+      color: white;
+      border-radius: 0.2rem;
+    }
+    b {
+      margin-left: 0.35rem;
+      font-weight: 500;
+    }
+  }
+}
+.check-out-area {
+  width: 80%;
+  margin: auto;
+}
+.check-out-body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.check-out-right-side,
+.check-out-left-side {
+  width: 100%;
+  flex-direction: column;
+}
+.check-out-right-side {
+  flex: 1 0 0;
+}
+
+.check-out-left-side {
+  flex: 2 0 0;
+}
+.input-group {
+  input:disabled {
+    background-color: rgba(187, 185, 185, 0.39);
+  }
+  input,
+  select,
+  textarea {
+    margin: 0.15rem;
+    width: 95%;
+  }
+  select,
+  textarea {
+    padding-top: 1rem;
+  }
+}
+
+.userInput {
+  padding-bottom: 0.25rem;
+}
+textarea:focus {
+  outline: none;
+}
+.input-group select:focus + .form-label .content-name,
+.input-group select:valid + .form-label .content-name {
+  transform: translateY(-150%);
+  font-size: 0.6rem;
+  color: #86bc42;
+}
+.input-group textarea:focus + .form-label .content-name,
+.input-group textarea:valid + .form-label .content-name {
+  transform: translateY(-280%);
+  font-size: 0.6rem;
+  color: #86bc42;
+}
+.input-checkbox {
+  margin: 0.25rem;
+}
+.bill-info {
+  // padding: 0.25rem 0;
+  margin: 0.25rem auto;
+  width: 99%;
+  .products-name {
+    width: 65%;
+  }
+  .products-unit,
+  .products-number {
+    width: 10%;
+  }
+  .products-price {
+    width: 15%;
+  }
+  tbody {
+    tr {
+      input {
+        // margin: auto;
+        text-align: center;
+        padding: 0 0.15rem;
+        width: 100%;
+      }
+    }
+    td {
+      // font-size: 1.2rem;
+    }
+  }
+  .fa-trash-alt {
+    margin-right: 0.35rem;
+  }
+  .products-unit-cell {
+    display: flex;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .container-header {
+    h1 {
+      font-size: 0.9rem;
+    }
+  }
+  .check-out-area {
+    padding: 3.7rem 0;
+  }
+  .check-out-body {
+    flex-direction: column;
+  }
+  .check-out-right-side,
+  .check-out-left-side {
+    flex: 1;
+  }
+}

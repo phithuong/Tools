@@ -1,0 +1,176 @@
+.container-wrapper {
+  width: 95%;
+  -webkit-column-break-inside: avoid;
+          break-inside: avoid;
+  margin: 0.75rem 0rem;
+  border: 0.1rem solid #e2e2e2;
+  border-radius: 0.3rem;
+}
+
+.container-header {
+  font-size: 1rem;
+  background-color: #f7f7f7;
+  padding: 0.5rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.container-header h1 {
+  margin-left: 0.35rem;
+}
+
+.container-header h1 span {
+  margin: 0.5rem auto;
+  padding: 0 0.35rem;
+  background-color: #86bc42;
+  color: white;
+  border-radius: 0.2rem;
+}
+
+.container-header h1 b {
+  margin-left: 0.35rem;
+  font-weight: 500;
+}
+
+.check-out-area {
+  width: 80%;
+  margin: auto;
+}
+
+.check-out-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.check-out-right-side,
+.check-out-left-side {
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.check-out-right-side {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+}
+
+.check-out-left-side {
+  -webkit-box-flex: 2;
+      -ms-flex: 2 0 0px;
+          flex: 2 0 0;
+}
+
+.input-group input:disabled {
+  background-color: rgba(187, 185, 185, 0.39);
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  margin: 0.15rem;
+  width: 95%;
+}
+
+.input-group select,
+.input-group textarea {
+  padding-top: 1rem;
+}
+
+.userInput {
+  padding-bottom: 0.25rem;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.input-group select:focus + .form-label .content-name,
+.input-group select:valid + .form-label .content-name {
+  -webkit-transform: translateY(-150%);
+          transform: translateY(-150%);
+  font-size: 0.6rem;
+  color: #86bc42;
+}
+
+.input-group textarea:focus + .form-label .content-name,
+.input-group textarea:valid + .form-label .content-name {
+  -webkit-transform: translateY(-280%);
+          transform: translateY(-280%);
+  font-size: 0.6rem;
+  color: #86bc42;
+}
+
+.input-checkbox {
+  margin: 0.25rem;
+}
+
+.bill-info {
+  margin: 0.25rem auto;
+  width: 99%;
+}
+
+.bill-info .products-name {
+  width: 65%;
+}
+
+.bill-info .products-unit,
+.bill-info .products-number {
+  width: 10%;
+}
+
+.bill-info .products-price {
+  width: 15%;
+}
+
+.bill-info tbody tr input {
+  text-align: center;
+  padding: 0 0.15rem;
+  width: 100%;
+}
+
+.bill-info .fa-trash-alt {
+  margin-right: 0.35rem;
+}
+
+.bill-info .products-unit-cell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .container-header h1 {
+    font-size: 0.9rem;
+  }
+  .check-out-area {
+    padding: 3.7rem 0;
+  }
+  .check-out-body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .check-out-right-side,
+  .check-out-left-side {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+}
+/*# sourceMappingURL=checkOut.css.map */
