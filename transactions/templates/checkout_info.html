@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head-import %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/regist_user.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block container %}
+<h3>{{ message }}</h3>
+{% endblock %}
+
+{% block js-import %}
+<script src="https://code.jquery.com/jquery-1.4.3.js" integrity="sha256-DjMDo6DOyV68jDzD4Z/HHJlIf6ooawXQGj64zKTZC8c=" crossorigin="anonymous"></script>
+{% endblock %}

@@ -81,6 +81,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'storewebapp.wsgi.application'
 
+# Cache
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -141,6 +150,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "media-root")
+
+TEMPLATE_DIRS = [
+    os.path.join(PROJECT_ROOT, 'templates'),
+]
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url

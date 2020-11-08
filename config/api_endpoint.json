@@ -6,7 +6,7 @@
     },
     "GetCategoryDetail": {
         "method": "GET",
-        "endpoint": "https://public.kiotapi.com/categories{id}",
+        "endpoint": "https://public.kiotapi.com/categories{}",
         "params": []
     },
     "GetProductList": {
@@ -86,7 +86,7 @@
     },
     "GetProductDetail": {
         "method": "GET",
-        "endpoint": "https://public.kiotapi.com/products{id}",
+        "endpoint": "https://public.kiotapi.com/products/{}",
         "params": []
     },
     "AddOrder": {
@@ -340,12 +340,12 @@
     },
     "GetCustomerDetailById": {
         "method": "GET",
-        "endpoint": "https://public.kiotapi.com/customers/{id}",
+        "endpoint": "https://public.kiotapi.com/customers/{}",
         "params": []
     },
     "GetCustomerDetailByCode": {
         "method": "GET ",
-        "endpoint": "https://public.kiotapi.com/customers/code/{code}",
+        "endpoint": "https://public.kiotapi.com/customers/code/{}",
         "params": []
     },
     "AddCustomerInfo": {

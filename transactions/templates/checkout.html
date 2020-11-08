@@ -2,168 +2,174 @@
 {% load static %}
 
 {% block head-import %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/regist_user.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}">
 {% endblock %}
 
 {% block container %}
+{% if request.session.cart %}
 <section class="check-out-area">
     <div class="check-out-body">
-        <div class="check-out-right-side">
-            <div class="container-wrapper">
-                <div class="container-header">
-                    <h1><span>1</span><b>Thông tin người nhận</b></h1>
-                </div>
-                <div class="userInput">
-                    <div class="input-group"> 
-                        <input name="fb-name-field" autocomplete="off" type="text" class="form-control" value="Đỗ Trường" disabled>
-                        <label class="form-label"><span class="content-name">Tài khoản Facebook</span></label> 
-                    </div> 
-                    <div class="input-group"> 
-                        <input name="email" autocomplete="off" type="email" class="form-control" required>
-                        <label class="form-label"><span class="content-name">Địa chỉ email</span></label> 
-                    </div> 
-                    <div class="input-group"> 
-                        <input id="tele-phone" name="tele-phone" autocomplete="off" type="text" class="form-control" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-                        <label class="form-label"><span class="content-name">Số điện thoại</span></label>
-                    </div> 
-                    <div class="input-group"> 
-                        <input name="receiver-name" autocomplete="off" type="text" class="form-control" required>
-                        <label class="form-label"><span class="content-name">Tên người nhận</span></label>
-                    </div> 
-                    <div class="input-group"> 
-                        <select name="receive-time" id="receive-time" class="form-control">
-                            <option></option>
-                            <option value="9-12">9-12h</option>
-                            <option value="12-14">12-14h</option>
-                            <option value="14-16">14-16h</option>
-                            <option value="16-18">6-18h</option>
-                            <option value="19-21">19-21h</option>
-                            <option value="20-21">20-21h</option>
-                        </select>
-                        <!-- <input id="tele-phone" name="numeric" autocomplete="off" type="text" class="form-control" required> -->
-                        <label class="form-label"><span class="content-name">Số điện thoại</span></label>
-                    </div> 
-                    <div class="input-group"> 
-                        <input name="zipcode" autocomplete="off" type="text" class="form-control" pattern="[0-9]{3}-[0-9]{4}" required>
-                        <label class="form-label"><span class="content-name">Mã bưu điện</span></label>
-                    </div> 
-                    <div class="input-group"> 
-                        <textarea name="address" autocomplete="off" type="text" class="form-control" required></textarea>
-                        <label class="form-label"><span class="content-name">Địa chỉ</span></label>
-                    </div> 
-                </div>
-            </div>
-            <div class="container-wrapper">
-                <div class="container-header">
-                    <h1><span>2</span><b>Ghi chú</b></h1>
-                </div>
-                <div class="userInput">
-                    <div class="input-group"> 
-                        <textarea name="note" autocomplete="off" type="text" class="form-control" rows="4"></textarea>
-                    </div> 
-                </div>  
-            </div>
-            <div class="container-wrapper">
-                <div class="container-header">
-                    <h1><span>3</span><b>Hình thức thanh toán</b></h1>
-                </div>
-                <div class="userInput">
-                    <div class="input-checkbox">
-                        <input type="radio" id="at-store" name="choice-payments" value="at-store">
-                        <label for="at-store">Tại cửa hàng</label><br>
-                        <input type="radio" id="bank-tranfer" name="choice-payments" value="bank-tranfer" checked="checked">
-                        <label for="bank-tranfer">Chuyển khoản trực tiếp</label><br>
-                        <input type="radio" id="daibiki" name="choice-payments" value="daibiki">
-                        <label for="daibiki">Daibiki(COD) <span style="color: red;">+ 430¥</span> </label><br>
+        <!-- Order form -->
+        <form action="{% url 'order' %}" method="post">
+            {% csrf_token %}
+            <div class="check-out-right-side">
+                <div class="container-wrapper">
+                    <div class="container-header">
+                        <h1><span>1</span><b>Thông tin người nhận</b></h1>
                     </div>
-                    <div class="bank-infor">
+                    <div class="userInput">
                         <div class="input-group"> 
-                            <input name="bank-account-number" autocomplete="off" type="text" class="form-control" pattern="[0-9]{5}-[0-9]{8}"required>
-                            <label class="form-label"><span class="content-name">Số thẻ của bạn</span></label>
+                            <input name="fb-name-field" autocomplete="off" type="text" class="form-control" value="Đỗ Trường" disabled>
+                            <label class="form-label"><span class="content-name">Tài khoản Facebook</span></label> 
                         </div> 
-                        <span style="font-size: 0.75rem; color: silver; margin-left: 0.25rem;">Dùng để xác nhận khi chuyển khoản</span>
-                        <table style="margin-left: 0.25rem;">
-                            <tr>
-                                <td>xxxxxx銀行</td>
-                                <td>（xxxxx店）</td>
-                            </tr>
-                            <tr>
-                                <td>番号</td>
-                                <td>xxxxx-xxxxxxxxx</td>
-                            </tr>
-                            <tr>
-                                <td>名前</td>
-                                <td>xxxxxxxxxxxx</td>
-                            </tr>
+                        <div class="input-group"> 
+                            <input name="email" autocomplete="off" type="email" value="{{ user.email }}" class="form-control" required>
+                            <label class="form-label"><span class="content-name">Địa chỉ email</span></label> 
+                        </div> 
+                        <div class="input-group"> 
+                            <input id="tele-phone" name="tele-phone" autocomplete="off" type="text" value="{{ user.contactNumber }}" class="form-control" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                            <label class="form-label"><span class="content-name">Số điện thoại</span></label>
+                        </div> 
+                        <div class="input-group"> 
+                            <input name="receiver-name" autocomplete="off" type="text" class="form-control" value="{{ user.fullName }}" required>
+                            <label class="form-label"><span class="content-name">Tên người nhận</span></label>
+                        </div> 
+                        <div class="input-group"> 
+                            <select name="receive-time" id="receive-time" class="form-control">
+                                <option></option>
+                                <option value="9-12">9-12h</option>
+                                <option value="12-14">12-14h</option>
+                                <option value="14-16">14-16h</option>
+                                <option value="16-18">6-18h</option>
+                                <option value="19-21">19-21h</option>
+                                <option value="20-21">20-21h</option>
+                            </select>
+                            <!-- <input id="tele-phone" name="numeric" autocomplete="off" type="text" class="form-control" required> -->
+                            <label class="form-label"><span class="content-name">Thời gian nhận hàng</span></label>
+                        </div> 
+                        <div class="input-group"> 
+                            <input name="zipcode" autocomplete="off" type="text" class="form-control" pattern="[0-9]{3}-[0-9]{4}" required>
+                            <label class="form-label"><span class="content-name">Mã bưu điện</span></label>
+                        </div> 
+                        <div class="input-group"> 
+                            <textarea name="address" autocomplete="off" type="text" class="form-control" required>{{ user.address }}</textarea>
+                            <label class="form-label"><span class="content-name">Địa chỉ</span></label>
+                        </div> 
+                    </div>
+                </div>
+                <div class="container-wrapper">
+                    <div class="container-header">
+                        <h1><span>2</span><b>Ghi chú</b></h1>
+                    </div>
+                    <div class="userInput">
+                        <div class="input-group"> 
+                            <textarea name="note" autocomplete="off" type="text" class="form-control" rows="4"></textarea>
+                        </div> 
+                    </div>  
+                </div>
+                <div class="container-wrapper">
+                    <div class="container-header">
+                        <h1><span>3</span><b>Hình thức thanh toán</b></h1>
+                    </div>
+                    <div class="userInput">
+                        <div class="input-checkbox">
+                            <input type="radio" id="at-store" name="choice-payments" value="at-store">
+                            <label for="at-store">Tại cửa hàng</label><br>
+                            <input type="radio" id="bank-tranfer" name="choice-payments" value="bank-tranfer" checked="checked">
+                            <label for="bank-tranfer">Chuyển khoản trực tiếp</label><br>
+                            <input type="radio" id="daibiki" name="choice-payments" value="daibiki">
+                            <label for="daibiki">Daibiki(COD) <span style="color: red;">+ 430¥</span> </label><br>
+                        </div>
+                        <div class="bank-infor">
+                            <div class="input-group"> 
+                                <input name="bank-account-number" autocomplete="off" type="text" class="form-control" pattern="[0-9]{5}-[0-9]{8}"required>
+                                <label class="form-label"><span class="content-name">Số thẻ của bạn</span></label>
+                            </div> 
+                            <span style="font-size: 0.75rem; color: silver; margin-left: 0.25rem;">Dùng để xác nhận khi chuyển khoản</span>
+                            <table style="margin-left: 0.25rem;">
+                                <tr>
+                                    <td>xxxxxx銀行</td>
+                                    <td>（xxxxx店）</td>
+                                </tr>
+                                <tr>
+                                    <td>番号</td>
+                                    <td>xxxxx-xxxxxxxxx</td>
+                                </tr>
+                                <tr>
+                                    <td>名前</td>
+                                    <td>xxxxxxxxxxxx</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-wrapper">
+                    <div class="container-header">
+                        <h1><span>4</span><b>Hình thức vận chuyển</b></h1>
+                    </div>
+                    <div class="userInput">
+                        <div class="input-checkbox">
+                            <input type="radio" id="type-ship-normal" name="choice-ship" value="type-ship-normal" checked="checked">
+                            <label for="type-ship-normal">Vận chuyển tiêu chuẩn</label><br>
+                            <input type="radio" id="type-ship-ice" name="choice-ship" value="type-ship-ice">
+                            <label for="type-ship-ice">Vận chuyển đông lạnh<span style="color: red;">+ 700¥</span> </label><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="check-out-left-side">
+                <div class="container-wrapper">
+                    <div class="container-header">
+                        <h1><span>5</span><b>Chi tiết đơn hàng</b></h1>
+                    </div>
+                    <div class="userInput">
+                        <table class="bill-info">
+                            <thead>
+                                <tr>
+                                    <th class="products-name">Sản phẩm</th>
+                                    <th class="products-unit">Đơn vị</th>
+                                    <th class="products-number">Số lượng</th>
+                                    <th class="products-price">Đ.Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for key, value in data.items %}
+                                <tr>
+                                    <!-- Product Name -->
+                                    <td class="products-name-cell">
+                                        <i class="fas fa-trash-alt"></i>
+                                        {{ value.productName }}
+                                    </td>
+
+                                    <!-- Product Unit-->
+                                    <td class="products-unit-cell">{{ value.productUnit }}</td>
+
+                                    <!-- Product Number -->
+                                    <td class="products-number-cell">
+                                        <i class="fas fa-minus"></i>
+                                        <span id="product-numbers" class="form-control">{{ value.productNum }}</span>
+                                        <i class="fas fa-plus"></i>
+                                    </td>
+
+                                    <!-- Product Price -->
+                                    <td class="products-price-cell">{{ value.productPrice }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="container-wrapper">
-                <div class="container-header">
-                    <h1><span>4</span><b>Hình thức vận chuyển</b></h1>
-                </div>
-                <div class="userInput">
-                    <div class="input-checkbox">
-                        <input type="radio" id="type-ship-normal" name="choice-ship" value="type-ship-normal" checked="checked">
-                        <label for="type-ship-normal">Vận chuyển tiêu chuẩn</label><br>
-                        <input type="radio" id="type-ship-ice" name="choice-ship" value="type-ship-ice">
-                        <label for="type-ship-ice">Vận chuyển đông lạnh<span style="color: red;">+ 700¥</span> </label><br>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="check-out-left-side">
-            <div class="container-wrapper">
-                <div class="container-header">
-                    <h1><span>5</span><b>Chi tiết đơn hàng</b></h1>
-                </div>
-                <div class="userInput">
-                    <table class="bill-info">
-                        <thead>
-                            <tr>
-                                <th class="products-name">Sản phẩm</th>
-                                <th class="products-unit"></th>
-                                <th class="products-number">SL</th>
-                                <th class="products-price">Đ.Giá</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
-                                <td class="products-unit-cell">1 Kg</td>
-                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
-                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
-                                <td class="products-price-cell">2000¥</td>
-                            </tr>
-                            <tr>
-                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
-                                <td class="products-unit-cell">1 Kg</td>
-                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
-                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
-                                <td class="products-price-cell">2000¥</td>
-                            </tr>
-                            <tr>
-                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
-                                <td class="products-unit-cell">1 Kg</td>
-                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
-                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
-                                <td class="products-price-cell">2000¥</td>
-                            </tr>
-                            <tr>
-                                <td class="products-name-cell"><i class="fas fa-trash-alt"></i>Sản phẩm thứ 1</td>
-                                <td class="products-unit-cell">1 Kg</td>
-                                <!-- <input type="number" class="form-control" value="100" min="1" disabled> -->
-                                <td class="products-number-cell"><i class="fas fa-minus"></i><span id="product-numbers" class="form-control">1</span><i class="fas fa-plus"></i></td>
-                                <td class="products-price-cell">2000¥</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+
+            <input type="submit" name="submit" value="Đặt hàng">
+        </form>
     </div>
 </section>
+{% else %}
+<h3>{{ message }}</h3>
+{% endif %}
 {% endblock %}
 
 {% block js-import %}

@@ -11,3 +11,9 @@ def get_session(request, key=None):
     else:
         value = request.session
     return value
+
+# Remove data from session
+def remove_session(request, key=None):
+    if key in request.session:
+        del request.session[key]
+    return 0

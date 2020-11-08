@@ -16,12 +16,23 @@
 <div class="nav-group">
     <nav class="nav-item">
         <ul class="nav-item-group">
-            {% if user_name %}
-                <li><span>{{ user_name }}</span></li>
+            <!-- Sign in / sign out button -->
+            {% if request.session.user.user_name %}
+            <li><span>{{ request.session.user.user_name }}</span></li>
             {% else %}
-                <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
+            <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
             {% endif %}
-            <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
+
+            <!-- Cart button -->
+            <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a>
+                <span id="product-num-in-cart" class="cart-item">
+                    {% if request.session.cart %}
+                    {{ request.session.cart.total }}
+                    {% else %}
+                    0
+                    {% endif%}
+                </span>
+            </li>
         </ul>
     </nav>
 </div>
@@ -29,12 +40,23 @@
 
 {% block header-mobile-nav %}
 <ul>
-    {% if user_name %}
-        <li><span>{{ user_name }}</span></li>
+    <!-- Sign in / sign out button -->
+    {% if request.session.user.user_name %}
+    <li><span>{{ request.session.user.user_name }}</span></li>
     {% else %}
-        <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
+    <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
     {% endif %}
-    <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
+
+    <!-- Cart button -->
+    <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a>
+        <span id="product-num-in-cart" class="cart-item">
+            {% if request.session.cart %}
+            {{ request.session.cart.total }}
+            {% else %}
+            0
+            {% endif%}
+        </span>
+    </li>
 </ul>
 {% endblock %}
 
@@ -140,6 +162,7 @@
                 {% for item in value %}
                     <li class="item-wrapper">
                         <div class="item-row-1">
+                            <!-- Show product information -->
                             <div class="item-title">
                                 <h3>{{ item.fullName }}</h3>
                                 <div class="item-subtitle-wrapper">
@@ -150,8 +173,14 @@
                             <div class="item-price">
                                 <span>{{ item.price }}¥</span>
                             </div>
+
+                            <!-- Add product to cart-->
                             <div class="item-order">
-                                <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                <form action="{% url 'add_cart' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="productId" value="{{ item.productId }}">
+                                    <button id="btn-add-prduct-cart" class="zmdi zmdi-shopping-cart-plus"></button>
+                                </form>
                             </div>
                         </div>
                     </li>
@@ -173,4 +202,5 @@
 {% block js-import %}
 <script type="text/javascript" src="{% static 'js/owl.carousel.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/app-custom.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/home.js' %}"></script>
 {% endblock %}

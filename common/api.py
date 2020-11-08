@@ -37,13 +37,14 @@ class Api:
         return api_list
 
     @staticmethod
-    def call(method, url, headers, payload):
+    def call(method, url, **kwargs):
         response = None
         try:
-            if method == 'POST':
-                response = requests.request(method, url, headers = headers, data = payload)
-            elif method == 'GET':
-                response = requests.request(method, url, headers = headers, params = payload)
+            response = requests.request(method, url, **kwargs)
+            # if method == 'POST':
+            #     response = requests.request(method, url, **kwargs)
+            # elif method == 'GET':
+            #     response = requests.request(method, url, headers = headers, params = payload)
 
         except Exception as Ex:
             ex = CustomException(500, ReturnCode.get(500))
@@ -62,7 +63,20 @@ class Api:
             'Authorization': 'Bearer {:s}'.format(self._access_token)
         }
 
-        response = Api.call(method, url, headers, payload)
+        response = Api.call(method, url, headers=headers, params=payload)
+        return response.json()
+
+    def get_product_detail(self, productId):
+        method = self._api_list['GetProductDetail']['method']
+        url = self._api_list['GetProductDetail']['endpoint'].format(productId)
+
+        payload = {}
+        headers = {
+            'Retailer': self._retailer,
+            'Authorization': 'Bearer {:s}'.format(self._access_token)
+        }
+
+        response = Api.call(method, url, headers=headers, params=payload)
         return response.json()
 
     def get_category_list(self):
@@ -74,7 +88,7 @@ class Api:
             'Retailer': self._retailer,
             'Authorization': 'Bearer {:s}'.format(self._access_token)
         }
-        response = Api.call(method, url, headers, payload)
+        response = Api.call(method, url, headers=headers, params=payload)
         return response.json()
 
     def get_user_list(self):
@@ -86,7 +100,7 @@ class Api:
             'Retailer': self._retailer,
             'Authorization': 'Bearer {:s}'.format(self._access_token)
         }
-        response = Api.call(method, url, headers, payload)
+        response = Api.call(method, url, headers=headers, params=payload)
         return response.json()
 
     def get_branch_list(self):
@@ -98,7 +112,7 @@ class Api:
             'Retailer': self._retailer,
             'Authorization': 'Bearer {:s}'.format(self._access_token)
         }
-        response = Api.call(method, url, headers, payload)
+        response = Api.call(method, url, headers=headers, params=payload)
         return response.json()
 
     def get_customer_list(self):
@@ -110,7 +124,7 @@ class Api:
             'Retailer': self._retailer,
             'Authorization': 'Bearer {:s}'.format(self._access_token)
         }
-        response = Api.call(method, url, headers, payload)
+        response = Api.call(method, url, headers=headers, params=payload)
         return response.json()
 
     def add_customer(self, branchId, name, contactNumber='', address='', email=''):
@@ -129,7 +143,19 @@ class Api:
             'Authorization': 'Bearer {:s}'.format(self._access_token),
             'Content-Type': 'application/json'
         }
-        response = Api.call(method, url, headers, payload)
+        response = Api.call(method, url, headers=headers, json=payload)
+        return response.json()
+
+    def get_customer_detail(self, customerId):
+        method = self._api_list['GetCustomerDetailById']['method']
+        url = self._api_list['GetCustomerDetailById']['endpoint'].format(customerId)
+
+        payload = {}
+        headers = {
+            'Retailer': self._retailer,
+            'Authorization': 'Bearer {:s}'.format(self._access_token),
+        }
+        response = Api.call(method, url, headers=headers, params=payload)
         return response.json()
 
     def add_order(self, branchId, casherId, customer, orderDetails, makeInvoice=False):
@@ -148,5 +174,5 @@ class Api:
             'Authorization': 'Bearer {:s}'.format(self._access_token),
             'Content-Type': 'application/json'
         }
-        response = Api.call(method, url, headers, payload)
+        response = Api.call(method, url, headers=headers, json=payload)
         return response.json()
