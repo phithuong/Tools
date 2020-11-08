@@ -72,7 +72,8 @@
           flex: 2 0 0;
 }
 
-.input-group input:disabled {
+.input-group input:disabled,
+.input-group textarea:disabled {
   background-color: rgba(187, 185, 185, 0.39);
 }
 
@@ -80,7 +81,10 @@
 .input-group select,
 .input-group textarea {
   margin: 0.15rem;
-  width: 95%;
+}
+
+.input-group textarea {
+  font-size: 1.1rem;
 }
 
 .input-group select,
@@ -92,14 +96,14 @@
   padding-bottom: 0.25rem;
 }
 
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none;
 }
 
-.input-group select:focus + .form-label .content-name,
-.input-group select:valid + .form-label .content-name {
-  -webkit-transform: translateY(-150%);
-          transform: translateY(-150%);
+.input-group select:focus + .form-label .content-name {
+  -webkit-transform: translateY(-130%);
+          transform: translateY(-130%);
   font-size: 0.6rem;
   color: #86bc42;
 }

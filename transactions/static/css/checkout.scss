@@ -52,14 +52,18 @@
   flex: 2 0 0;
 }
 .input-group {
-  input:disabled {
+  input:disabled,
+  textarea:disabled {
     background-color: rgba(187, 185, 185, 0.39);
   }
   input,
   select,
   textarea {
     margin: 0.15rem;
-    width: 95%;
+    // width: 95%;
+  }
+  textarea {
+    font-size: 1.1rem;
   }
   select,
   textarea {
@@ -70,12 +74,14 @@
 .userInput {
   padding-bottom: 0.25rem;
 }
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none;
 }
-.input-group select:focus + .form-label .content-name,
-.input-group select:valid + .form-label .content-name {
-  transform: translateY(-150%);
+// ,
+// .input-group select:valid + .form-label .content-name
+.input-group select:focus + .form-label .content-name {
+  transform: translateY(-130%);
   font-size: 0.6rem;
   color: #86bc42;
 }

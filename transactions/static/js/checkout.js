@@ -14,8 +14,7 @@ $(".fa-trash-alt").click(function(e){
     tableRow.remove();
 });
 function checkPhoneNumber(){
-    $("#tele-phone").keydown(function (e) {
-        console.log(e.keyCode);
+    $("#tele-phone, #zipcode").keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
              // Allow: Ctrl+A, Command+A
@@ -30,7 +29,7 @@ function checkPhoneNumber(){
             e.preventDefault();
         }
     });
-    $("#tele-phone").keyup(function(e) {  
+    $("#tele-phone, #zipcode").keyup(function(e) {  
     	var numericvalue = $(this); 
     	var position = getCursorPosition(numericvalue);
         if (// Allow: Ctrl+A, Command+A
@@ -40,25 +39,24 @@ function checkPhoneNumber(){
                  // let it happen, don't do anything
                  return;
         }
-	        
 	    var inputval = numericvalue.val();
 	    digits = inputval.replace(/\D/g,'');
-
+        
         if(digits.length > 2){
             res = digits.substring(0, 3);
             // result = "(" + res + ") ";
             result = res + "-";
             res = digits.substring(3);
         	result = result + res;
-        	
-            if(digits.length > 6){
-                res = digits.substring(0, 3);
-                // result = "(" + res + ") ";
-                result = res + "-";
-            	res = digits.substring(3,6);
-            	result = result + res + "-";
-            	res = digits.substring(6);
-            	result = result + res;
+        	if($(this)[0].id === "tele-phone"){
+                if(digits.length > 6){
+                    res = digits.substring(0, 3);
+                    result = res + "-";
+                    res = digits.substring(3,6);
+                    result = result + res + "-";
+                    res = digits.substring(6);
+                    result = result + res;
+                }
             }
             numericvalue.val(result);
             result ="";
@@ -103,16 +101,33 @@ function getCursorPosition (numericvalue) {
         return pos;
 }
 checkPhoneNumber();
-
 var radiosPayments = document.getElementsByName('choice-payments');
-var bankInfo = document.querySelector('.bank-infor');
+var paymentsMethod = document.getElementsByClassName('payments-method');
+var templateBankInfo = document.getElementById('bank-infor');
+var templateDaibikiFee = document.getElementById('daibiki-bill');
+var rItems = document.getElementsByClassName('row-item');
 
 for(i=0; i<radiosPayments.length; i++ ) {
     radiosPayments[i].onclick = function(e) {
         if(e.target.defaultValue === "bank-tranfer"){
-            bankInfo.style.display = "block";
+            var clone = templateBankInfo.content.cloneNode(true);
+            if(!$('.bank-infor-wrapper').length){
+                $(paymentsMethod).append(clone);
+            }
         }else{
-            bankInfo.style.display = "none";
+            if($('.bank-infor-wrapper')){
+                $('.bank-infor-wrapper').remove();
+            }
+        }
+        if(e.target.defaultValue === "daibiki"){
+            var clone = templateDaibikiFee.content.cloneNode(true);
+            if(!$('.row-daibiki-fee').length){
+                $(rItems[rItems.length - 1]).after(clone);
+            }
+        }else{
+            if($('.row-daibiki-fee')){
+                $('.row-daibiki-fee').remove();
+            }
         }
         if(e.ctrlKey) {
             this.checked = false;
@@ -122,8 +137,48 @@ for(i=0; i<radiosPayments.length; i++ ) {
 var radiosShipTypes = document.getElementsByName('choice-ship');
 for(i=0; i<radiosShipTypes.length; i++ ) {
     radiosShipTypes[i].onclick = function(e) {
+        var templateDaibikiFee = document.getElementById('ship-bill');
+        var rItems = document.getElementsByClassName('row-item');
+        if(e.target.defaultValue === "type-ship-ice"){
+            var clone = templateDaibikiFee.content.cloneNode(true);
+            if(!$('.row-ship-fee').length){
+                $(rItems[rItems.length - 1]).after(clone);
+            }
+        }else{
+            if($('.row-ship-fee')){
+                $('.row-ship-fee').remove();
+            }
+        }
         if(e.ctrlKey) {
             this.checked = false;
         }
     }
 }
+
+
+function zipCodeAutoGenerate(){
+    $("#zipcode").change(function() {
+        if($(this).val().length >= 7){
+            // console.log($(this).val().replace('-',''));
+            $.ajax({
+                url: 'http://zipcloud.ibsnet.co.jp/api/search?zipcode=' + $(this).val().replace('-',''),
+                dataType : 'jsonp',
+            }).done(function(data) {
+                if (data.results) {
+                   setAddress(data.results[0]);
+                } else {
+                    alert('Chúng tôi không tìm thấy địa chỉ ứng với mã bưu điện của bạn.');
+                    $('#address').val("");
+                    $('#address').prop("disabled", true);
+                }
+            }).fail(function(data) {
+                alert('Kết nối thất bại. Hãy liên lạc với quản trị viên.');
+            });
+            function setAddress(data) {
+                $('#address').val(data.address1 + data.address2 + data.address3);
+                $('#address').prop("disabled", false);
+            }
+        }
+    });
+}
+zipCodeAutoGenerate();
