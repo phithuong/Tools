@@ -18,9 +18,15 @@
         <ul class="nav-item-group">
             <!-- Sign in / sign out button -->
             {% if request.session.user.user_name %}
-            <li><span>{{ request.session.user.user_name }}</span></li>
+            <li>
+                <span>{{ request.session.user.user_name }}</span>
+                <a href="{% url 'logout' %}" class="fas fa-user fa-2x">Log out</a>
+            </li>
+            {% elif user.is_authenticated %}
+                {{ user.username }}
+                <a href="{% url 'logout' %}" class="fas fa-user fa-2x">Log out</a>
             {% else %}
-            <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
+            <li><a href="{% url 'login' %}" class="fas fa-user fa-2x">Log in</a></li>
             {% endif %}
 
             <!-- Cart button -->

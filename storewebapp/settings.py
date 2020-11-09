@@ -44,9 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'home',
     'usermanagement',
-    'transactions'
+    'transactions',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -159,3 +164,45 @@ TEMPLATE_DIRS = [
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+# Authentication with social accounts
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+LOGIN_REDIRECT_URL = 'home'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook':
+        {
+            'METHOD': 'oauth2',
+            'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+            'SCOPE': ['email', 'public_profile'],
+            'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+            'INIT_PARAMS': {'cookie': True},
+            'FIELDS': [
+                'id',
+                'first_name',
+                'last_name',
+                'name',
+                'name_format',
+                'picture',
+                'short_name'
+            ],
+            'EXCHANGE_TOKEN': True,
+            'LOCALE_FUNC': lambda request: 'en_US',
+            'VERIFIED_EMAIL': False,
+            'VERSION': 'v7.0',
+            # you should fill in 'APP' only if you don't create a Facebook instance at /admin/socialaccount/socialapp/
+            'APP': {
+                'client_id': '967360890417266',  # !!! THIS App ID
+                'secret': 'cf3cd6465f347a2ff74b822720e3b4f7',  # !!! THIS App Secret
+                'key': ''
+            }
+        }
+}

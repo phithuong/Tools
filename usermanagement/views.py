@@ -22,7 +22,7 @@ from .models import User
 from common.encryption import Encyption
 from common.exception import CustomException
 from common.constants import ReturnCode
-from common.session import save_session, get_session
+from common.session import save_session, get_session, remove_session
 
 # Read app configuration
 app_config = None
@@ -39,7 +39,7 @@ def login(request):
     if request.method == 'POST':
         try:
             # create a form instance and populate it with data from the request:
-            user_form = UserLoginForm(data=request.POST or None, files=request.FILES or None)
+            # user_form = UserLoginForm(data=request.POST or None, files=request.FILES or None)
 
             # check whether it's valid:
             # if user_form.is_valid():
@@ -89,11 +89,18 @@ def login(request):
 
 
 @csrf_exempt
+def logout(request):
+    remove_session(request, key='user')
+    response = redirect('home')
+    return response
+
+
+@csrf_exempt
 def regist_user(request):
     if request.method == 'POST':
         try:
             # create a form instance and populate it with data from the request:
-            user_form = UserRegistForm(data=request.POST or None, files=request.FILES or None)
+            # user_form = UserRegistForm(data=request.POST or None, files=request.FILES or None)
 
             # Check form is valid
             # if user_form.is_valid():

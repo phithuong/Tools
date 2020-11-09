@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load socialaccount %}
+
+
 
 {% block head-import %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
@@ -11,8 +14,12 @@
         <div class="login">
             <div class="login-header">
                 <h3>Đăng nhập</h3>
+                <div class="login-header-social-icon">
+                    <a href="{% provider_login_url 'facebook' method='oauth2' %}"><i class="fab fa-facebook-square fa-2x"></i></a>
+                    <span><i class="fab fa-google-plus-square fa-2x"></i></span>
+                    <span><i class="fab fa-twitter-square fa-2x"></i></span>
+                </div>
             </div>
-            
             <div class="login-body">
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
@@ -36,12 +43,10 @@
                         <input type="checkbox">Ghi nhớ thông tin
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Xác Nhận" id="btnSignIn" class="btn float-right login_btn">
+                        <input type="submit" value="Xác Nhận" class="btn float-right login_btn">
                     </div>
                 </form>
             </div>
-
-            <!-- Redirect to sign up-->
             <div class="login-footer">
                 <div class="justify-content-center">
                     Bạn không có tài khoản?
@@ -51,25 +56,7 @@
                     <a href="#">Bạn đã quên mật khẩu?</a>
                 </div>
             </div>
-
-            <!-- Login with social network -->
-            <div class="login-footer">
-                <div class="justify-content-center">
-                    <small>Hãy sử dụng Facebook, hoặc Gmail để đăng nhập nhanh</small>
-                </div>
-                <div class="justify-content-center">
-                    <span><a href="{% url 'login' %}" onclick="login()" class="fab fa-facebook-square fa-3x"></a></span>
-                    <span><i class="fab fa-google-plus-square fa-3x"></i></span>
-                    <span><i class="fab fa-twitter-square fa-3x"></i></span>
-                </div>
-            </div>
-
-            <div id="fb-root"></div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block js-import %}
-<script src="{% static 'js/login.js' %}"></script>
 {% endblock %}
