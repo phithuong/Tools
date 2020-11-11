@@ -36,15 +36,13 @@ def order(request):
         user = get_session(request, key='user')
         user_info = {}
         if user is not None:
-            user = User.objects.get(user_name=user['user_name'])
-            user_kiotviet = api.get_customer_detail(user.user_id)
+            user_kiotviet = api.get_customer_detail(user['user_id'])
             user_info = {
                 'fullName': user_kiotviet['name'],
                 'email': user_kiotviet['email'],
                 'contactNumber': user_kiotviet['contactNumber'],
                 'address': user_kiotviet['address']
             }
-
 
         # Get cart detail
         cart = get_session(request, key='cart')

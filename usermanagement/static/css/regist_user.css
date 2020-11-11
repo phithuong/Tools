@@ -33,7 +33,8 @@ input:focus {
 }
 
 .input-group input:focus + .form-label .content-name,
-.input-group input:valid + .form-label .content-name {
+.input-group input:valid + .form-label .content-name,
+.input-group input:disabled + .form-label .content-name {
   -webkit-transform: translateY(-150%);
           transform: translateY(-150%);
   font-size: 0.6rem;

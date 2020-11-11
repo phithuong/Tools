@@ -1,13 +1,12 @@
 $(".fa-minus").click(function(e){
-    let number = e.target.nextSibling.innerHTML;
+    let number = e.target.nextElementSibling.innerHTML;
     if (Number(number) > 1){
-        e.target.nextSibling.innerHTML = String(Number(number) - 1);
+        e.target.nextElementSibling.innerHTML = String(Number(number) - 1);
     }
 });
 $(".fa-plus").click(function(e){
-    // let number = document.getElementById("product-numbers").innerHTML;
-    let number = e.target.previousSibling.innerHTML;
-    e.target.previousSibling.innerHTML = String(Number(number) + 1);
+    let number = e.target.previousElementSibling.innerHTML;
+    e.target.previousElementSibling.innerHTML = String(Number(number) + 1);
 });
 $(".fa-trash-alt").click(function(e){
     let tableRow = e.target.parentElement.parentElement;

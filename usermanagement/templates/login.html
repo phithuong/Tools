@@ -12,15 +12,19 @@
 <div class="wrapper-container">
     <div class="login-container d-flex justify-content-center">
         <div class="login">
+
             <div class="login-header">
                 <h3>Đăng nhập</h3>
+                <!-- Login with social accounts -->
                 <div class="login-header-social-icon">
                     <a href="{% provider_login_url 'facebook' method='oauth2' %}"><i class="fab fa-facebook-square fa-2x"></i></a>
                     <span><i class="fab fa-google-plus-square fa-2x"></i></span>
                     <span><i class="fab fa-twitter-square fa-2x"></i></span>
                 </div>
             </div>
+
             <div class="login-body">
+                <!-- Form data login -->
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
                     <!-- User Name -->
@@ -47,6 +51,8 @@
                     </div>
                 </form>
             </div>
+
+            <!-- Redirect to sign up-->
             <div class="login-footer">
                 <div class="justify-content-center">
                     Bạn không có tài khoản?

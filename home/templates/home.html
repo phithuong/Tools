@@ -22,9 +22,6 @@
                 <span>{{ request.session.user.user_name }}</span>
                 <a href="{% url 'logout' %}" class="fas fa-user fa-2x">Log out</a>
             </li>
-            {% elif user.is_authenticated %}
-                {{ user.username }}
-                <a href="{% url 'logout' %}" class="fas fa-user fa-2x">Log out</a>
             {% else %}
             <li><a href="{% url 'login' %}" class="fas fa-user fa-2x">Log in</a></li>
             {% endif %}
@@ -48,9 +45,12 @@
 <ul>
     <!-- Sign in / sign out button -->
     {% if request.session.user.user_name %}
-    <li><span>{{ request.session.user.user_name }}</span></li>
+    <li>
+        <span>{{ request.session.user.user_name }}</span>
+        <a href="{% url 'logout' %}" class="fas fa-user fa-2x">Log out</a>
+    </li>
     {% else %}
-    <li><a href="{% url 'login' %}" class="fas fa-user fa-2x"></a></li>
+    <li><a href="{% url 'login' %}" class="fas fa-user fa-2x">Log in</a></li>
     {% endif %}
 
     <!-- Cart button -->
@@ -124,7 +124,7 @@
             <li>
                 <div class="wrapper-li">
                     <div class="li-icon-block">
-                        <img src="{% static 'images/home-delivery_30x30_crop_center.png ' %}" alt="icon-2">
+                        <img src="{% static 'images/home-delivery_30x30_crop_center.png' %}" alt="icon-2">
                     </div>
                     <div class="li-text">
                         <h3>vận chuyển miễn phí</h3>
@@ -135,7 +135,7 @@
             <li>
                 <div class="wrapper-li no-border-right">
                     <div class="li-icon-block">
-                        <img src="{% static 'images/support_1_30x30_crop_center.png ' %}" alt="icon-3">
+                        <img src="{% static 'images/support_1_30x30_crop_center.png' %}" alt="icon-3">
                     </div>
                     <div class="li-text">
                         <h3>hỗ trợ mọi lúc</h3>
@@ -182,11 +182,8 @@
 
                             <!-- Add product to cart-->
                             <div class="item-order">
-                                <form action="{% url 'add_cart' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="productId" value="{{ item.productId }}">
-                                    <button id="btn-add-prduct-cart" class="zmdi zmdi-shopping-cart-plus"></button>
-                                </form>
+                                <input type="hidden" name="product-id" value="{{ item.productId }}">
+                                <button name="btn-add-prduct-cart" class="zmdi zmdi-shopping-cart-plus"></button>
                             </div>
                         </div>
                     </li>

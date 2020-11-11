@@ -35,7 +35,8 @@ input:focus {
   outline: none !important;
 }
 .input-group input:focus + .form-label .content-name,
-.input-group input:valid + .form-label .content-name {
+.input-group input:valid + .form-label .content-name,
+.input-group input:disabled + .form-label .content-name {
   transform: translateY(-150%);
   font-size: 0.6rem;
   color: #86bc42;

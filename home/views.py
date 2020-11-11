@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import Context, loader
+from django.views.decorators.csrf import csrf_exempt
 
 import os
 import sys
@@ -90,6 +91,7 @@ def home(request):
     return response
 
 
+@csrf_exempt
 def add_cart(request):
     data = request.POST
     product_id = data.get('productId')
@@ -111,8 +113,8 @@ def add_cart(request):
     # Save cart to session
     save_session(request, cart=cart)
 
-    response = redirect(reverse('home'))
-    return response
+    return JsonResponse({'cart': cart})
+
 
 def remove_cart(request):
     data = request.POST

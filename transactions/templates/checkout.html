@@ -10,9 +10,9 @@
 {% block container %}
 {% if request.session.cart %}
 <section class="check-out-area">
-    <div class="check-out-body">
+    <!-- <div class="check-out-body"> -->
         <!-- Order form -->
-        <form action="{% url 'order' %}" method="post">
+        <form action="{% url 'order' %}" method="post" class="check-out-body">
             {% csrf_token %}
             <div class="check-out-right-side">
                 <div class="container-wrapper">
@@ -50,11 +50,11 @@
                             <label class="form-label"><span class="content-name">Thời gian nhận hàng</span></label>
                         </div> 
                         <div class="input-group"> 
-                            <input name="zipcode" autocomplete="off" type="text" class="form-control" pattern="[0-9]{3}-[0-9]{4}" required>
+                            <input id="zipcode" name="zipcode" autocomplete="off" type="text" class="form-control" pattern="[0-9]{3}-[0-9]{4}" required>
                             <label class="form-label"><span class="content-name">Mã bưu điện</span></label>
                         </div> 
                         <div class="input-group"> 
-                            <textarea name="address" autocomplete="off" type="text" class="form-control" required>{{ user.address }}</textarea>
+                            <textarea id="address" name="address" autocomplete="off" type="text" class="form-control" disabled required>{{ user.address }}</textarea>
                             <label class="form-label"><span class="content-name">Địa chỉ</span></label>
                         </div> 
                     </div>
@@ -73,7 +73,8 @@
                     <div class="container-header">
                         <h1><span>3</span><b>Hình thức thanh toán</b></h1>
                     </div>
-                    <div class="userInput">
+                    
+                    <div class="userInput payments-method">
                         <div class="input-checkbox">
                             <input type="radio" id="at-store" name="choice-payments" value="at-store">
                             <label for="at-store">Tại cửa hàng</label><br>
@@ -82,27 +83,29 @@
                             <input type="radio" id="daibiki" name="choice-payments" value="daibiki">
                             <label for="daibiki">Daibiki(COD) <span style="color: red;">+ 430¥</span> </label><br>
                         </div>
-                        <div class="bank-infor">
-                            <div class="input-group"> 
-                                <input name="bank-account-number" autocomplete="off" type="text" class="form-control" pattern="[0-9]{5}-[0-9]{8}"required>
-                                <label class="form-label"><span class="content-name">Số thẻ của bạn</span></label>
-                            </div> 
-                            <span style="font-size: 0.75rem; color: silver; margin-left: 0.25rem;">Dùng để xác nhận khi chuyển khoản</span>
-                            <table style="margin-left: 0.25rem;">
-                                <tr>
-                                    <td>xxxxxx銀行</td>
-                                    <td>（xxxxx店）</td>
-                                </tr>
-                                <tr>
-                                    <td>番号</td>
-                                    <td>xxxxx-xxxxxxxxx</td>
-                                </tr>
-                                <tr>
-                                    <td>名前</td>
-                                    <td>xxxxxxxxxxxx</td>
-                                </tr>
-                            </table>
-                        </div>
+                        <template id="bank-infor">
+                            <div class="bank-infor-wrapper">
+                                <div class="input-group"> 
+                                    <input name="bank-account-number" autocomplete="off" type="text" class="form-control" pattern="[0-9]{5}-[0-9]{8}"required>
+                                    <label class="form-label"><span class="content-name">Số thẻ của bạn</span></label>
+                                </div> 
+                                <span style="font-size: 0.75rem; color: silver; margin-left: 0.25rem;">Dùng để xác nhận khi chuyển khoản</span>
+                                <table style="margin-left: 0.25rem;">
+                                    <tr>
+                                        <td>xxxxxx銀行</td>
+                                        <td>（xxxxx店）</td>
+                                    </tr>
+                                    <tr>
+                                        <td>番号</td>
+                                        <td>xxxxx-xxxxxxxxx</td>
+                                    </tr>
+                                    <tr>
+                                        <td>名前</td>
+                                        <td>xxxxxxxxxxxx</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </template>
                     </div>
                 </div>
                 <div class="container-wrapper">
@@ -136,7 +139,7 @@
                             </thead>
                             <tbody>
                                 {% for key, value in data.items %}
-                                <tr>
+                                <tr class="row-item">
                                     <!-- Product Name -->
                                     <td class="products-name-cell">
                                         <i class="fas fa-trash-alt"></i>
@@ -157,15 +160,31 @@
                                     <td class="products-price-cell">{{ value.productPrice }}</td>
                                 </tr>
                                 {% endfor %}
+                                <tr class="total">
+                                    <td class="products-name-cell" colspan="3">Tổng tiền</td>
+                                    <td class="products-price-cell">700¥</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <input type="submit" name="submit" value="Đặt hàng">
             </div>
 
-            <input type="submit" name="submit" value="Đặt hàng">
         </form>
-    </div>
+    <!-- </div> -->
+    <template id="daibiki-bill">
+        <tr class="row-daibiki-fee">
+            <td class="products-name-cell" colspan="3">Phí Daibiki</td>
+            <td class="products-price-cell">430¥</td>
+        </tr>
+    </template>
+    <template id="ship-bill">
+        <tr class="row-ship-fee">
+            <td class="products-name-cell" colspan="3">Phí chuyển đông lạnh</td>
+            <td class="products-price-cell">700¥</td>
+        </tr>
+    </template>
 </section>
 {% else %}
 <h3>{{ message }}</h3>
@@ -173,6 +192,7 @@
 {% endblock %}
 
 {% block js-import %}
-<script src="https://code.jquery.com/jquery-1.4.3.js" integrity="sha256-DjMDo6DOyV68jDzD4Z/HHJlIf6ooawXQGj64zKTZC8c=" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.4.3.js" integrity="sha256-DjMDo6DOyV68jDzD4Z/HHJlIf6ooawXQGj64zKTZC8c=" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
 {% endblock %}

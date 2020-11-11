@@ -4,6 +4,7 @@ from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.core.exceptions import ObjectDoesNotExist
+from allauth.socialaccount.models import SocialAccount
 
 import os
 import sys
@@ -71,7 +72,9 @@ def login(request):
                 if encyption_info['key'] != user.password:
                     raise CustomException(500, 'Password is incorrect.')
                 else:
-                    user={'user_name': user_name}
+                    userKiotviet = api.get_customer_detail(user.user_id)
+
+                    user={'user_name': user_name, 'user_id': userKiotviet['id']}
                     save_session(request, user=user)
                     response = redirect('home')
                     return response
@@ -90,6 +93,45 @@ def login(request):
 
 @csrf_exempt
 def logout(request):
+    remove_session(request, key='user')
+    response = redirect('home')
+    return response
+
+
+@csrf_exempt
+def fb_login(request):
+    user = request.user
+    user_name = user.username
+    email = user.email
+    full_name = '{} {}'.format(user.first_name, user.last_name)
+    password = user.password
+
+    userDb = None
+    userKiotviet = None
+    try:
+        userDb = User.objects.get(user_name=user_name)
+
+    except ObjectDoesNotExist as Ex:
+        # Regist user to kiotviet
+        branches = api.get_branch_list()['data']
+        userKiotviet = api.add_customer(branches[0]['id'], full_name, email=email)['data']
+
+        userDb = User(user_name=user_name, user_id=userKiotviet['id'], user_code=userKiotviet['code'],
+                      full_name=full_name, password=None, email=email, fb_link=None, salt=None)
+        userDb.publish()
+
+    else:
+        if userDb is not None:
+            userKiotviet = api.get_customer_detail(userDb.user_id)
+
+    user={'user_name': user_name, 'user_id': userKiotviet['id']}
+    save_session(request, user=user)
+    response = redirect('home')
+    return response
+
+
+@csrf_exempt
+def fb_logout(request):
     remove_session(request, key='user')
     response = redirect('home')
     return response
@@ -133,17 +175,17 @@ def regist_user(request):
 
                 # Regist user to kiotviet
                 branches = api.get_branch_list()['data']
-                userInfo = api.add_customer(branches[0]['id'], full_name, email=email)['data']
+                userKiotviet = api.add_customer(branches[0]['id'], full_name, email=email)['data']
 
                 # salt = user_name
                 salt = user_name
                 encyption_info = Encyption.encypt(password, salt)
 
-                user = User(user_name=user_name, user_id=userInfo['id'], user_code=userInfo['code'], full_name=full_name,
+                user = User(user_name=user_name, user_id=userKiotviet['id'], user_code=userKiotviet['code'], full_name=full_name,
                             password=encyption_info['key'], email=email, fb_link=fb_link, salt=encyption_info['salt'])
                 user.publish()
 
-                user={'user_name': user_name}
+                user={'user_name': user_name, 'user_id': userKiotviet['id']}
                 save_session(request, user=user)
                 response = redirect('home')
                 return response

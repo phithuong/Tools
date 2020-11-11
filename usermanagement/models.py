@@ -13,7 +13,7 @@ class User(models.Model):
     user_code = models.CharField(unique=True, max_length=30, null=False)
     user_name = models.CharField(unique=True, max_length=100, null=False)
     full_name = models.CharField(unique=True, max_length=100, null=False)
-    password = models.BinaryField(max_length=256, editable=True, null=False)
+    password = models.BinaryField(max_length=256, editable=True, null=True)
     fb_link = models.URLField(unique=True, null=True)
     email = models.EmailField(unique=True, null=True)
     # gender = models.CharField(choices=GENDER_CHOICES, max_length=50, null=True)
@@ -21,7 +21,7 @@ class User(models.Model):
     address = models.CharField(max_length=256, null=True)
     create_date = models.DateTimeField()
     update_date = models.DateTimeField()
-    salt = models.BinaryField(max_length=256, null=False)
+    salt = models.BinaryField(max_length=256, null=True)
     is_valid = models.BooleanField(null=False)
 
     class Meta:
