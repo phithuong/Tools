@@ -27,12 +27,13 @@ app_config = None
 with open(APP_CONFIG_PATH, mode='r') as f:
     app_config = json.load(f)
 
-SECRET_KEY = app_config['secret_key']
+SECRET_KEY = app_config['website_secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'mystorewebapp.herokuapp.com', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'mystorewebapp.herokuapp.com', '109.236.63.125', 'vinamart.site']
+ALLOWED_HOSTS.append(app_config['host'])
 
 
 # Application definition
@@ -143,13 +144,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
     os.path.join(PROJECT_ROOT, 'home/static'),
     os.path.join(PROJECT_ROOT, 'usermanagement/static'),
+    os.path.join(PROJECT_ROOT, 'transactions/static'),
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -171,7 +173,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
@@ -200,8 +202,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'VERSION': 'v7.0',
             # you should fill in 'APP' only if you don't create a Facebook instance at /admin/socialaccount/socialapp/
             'APP': {
-                'client_id': '967360890417266',  # !!! THIS App ID
-                'secret': 'cf3cd6465f347a2ff74b822720e3b4f7',  # !!! THIS App Secret
+                'client_id': app_config['fb_app_id'],  # !!! THIS App ID
+                'secret': app_config['fb_secret_app'],  # !!! THIS App Secret
                 'key': ''
             }
         }

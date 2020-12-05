@@ -1,33 +1,21 @@
+import os
+import sys
+import json
+import re
+
+from common.session import get_session, save_session
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, JsonResponse
 from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
 
-import os
-import sys
-import json
-
-WRK_DIR = os.path.join(os.path.dirname(__file__), '../')
-ACCESS_TOKEN_CONFIG_PATH = os.path.join(WRK_DIR, 'config/access_token.json')
-API_LIST_PATH = os.path.join(WRK_DIR, 'config/api_endpoint.json')
-APP_CONFIG_PATH = os.path.join(WRK_DIR, 'config/app.json')
-
-sys.path.append(WRK_DIR)
-from common.access_token import Token
-from common.api import Api
-from common.session import get_session, save_session
-
-# Read app configuration
-app_config = None
-with open(APP_CONFIG_PATH, mode='r') as f:
-    app_config = json.load(f)
-retailer = app_config['retailer']
-
-# Initiate api
-api = Api(ACCESS_TOKEN_CONFIG_PATH, API_LIST_PATH, retailer)
+from common.view_base import ViewBase
+view_base = ViewBase()
+api = view_base.get_api_instance()
+messages = view_base.get_messages()
 
 
-def home(request):
+def home(request, p=''):
     data = {}
     current_item = 0
     page_size = 20
@@ -42,7 +30,8 @@ def home(request):
         data[category['categoryName']] = []
 
     # Get products
-    products_info = api.get_product_list(currentItem=current_item, pageSize=page_size)
+    products_info = api.get_product_list(
+        currentItem=current_item, pageSize=page_size)
     products = products_info['data']
     total_product = products_info['total']
 
@@ -53,11 +42,15 @@ def home(request):
         if (ii == loop - 1):
             page_size = total_product - current_item
 
-        next_products = api.get_product_list(currentItem=current_item, pageSize=page_size)['data']
+        next_products = api.get_product_list(
+            currentItem=current_item, pageSize=page_size)['data']
         products.extend(next_products)
 
     # Inventory information (productId : quantity)
     inventoryInfos = {}
+
+    # Get cart information
+    cart = get_session(request, key='cart')
 
     for product in products:
         categoryName = product['categoryName']
@@ -65,13 +58,30 @@ def home(request):
         categoryId = product['categoryId']
         productId = product['id']
 
+        # search text
+        isNotFound = True
+        if (re.search(p, categoryName, re.IGNORECASE) is not None) \
+            or (re.search(p, product['name'], re.IGNORECASE) is not None) \
+            or (re.search(p, product['fullName'], re.IGNORECASE) is not None):
+            isNotFound = False
+
+        if isNotFound:
+            continue
+
+        if (cart is not None) and str(productId) in cart['products']:
+            orderQuantity = cart['products'][str(productId)]
+        else:
+            orderQuantity = 0
+
+        # Add product
         productInfo = {
             'productId': productId,
             'name': product['name'],
             'fullName': product['fullName'],
             'price': product['basePrice'],
             'unit': product['unit'] if 'unit' in product else '',
-            'conversionValue': product['conversionValue'] if 'conversionValue' in product else '1'
+            'conversionValue': product['conversionValue'] if 'conversionValue' in product else '1',
+            'orderQuantity': orderQuantity
         }
 
         # Get inventory
@@ -83,9 +93,6 @@ def home(request):
 
         # Add to list product of category
         data[categoryName].append(productInfo)
-
-    # Save token
-    # save_session(request, access_token=api._access_token)
 
     response = render(request, 'home.html', {'data': data})
     return response
@@ -113,18 +120,25 @@ def add_cart(request):
     # Save cart to session
     save_session(request, cart=cart)
 
-    return JsonResponse({'cart': cart})
+    response = JsonResponse({'cart': cart})
+    return response
 
 
+@csrf_exempt
 def remove_cart(request):
     data = request.POST
     product_id = data.get('productId')
+    is_subtract = data.get('isSubtract')
 
     # Remove product from cart
     cart = get_session(request, key='cart')
 
     cart['total'] -= 1
-    cart['products'][product_id] -= 1
+    if product_id in cart['products']:
+        if is_subtract:
+            cart['products'][product_id] -= 1
+        else:
+            cart['products'][product_id] = 0
 
     if cart['products'][product_id] == 0:
         cart['products'].pop(product_id)
@@ -132,5 +146,5 @@ def remove_cart(request):
     # Save cart to session
     save_session(request, cart=cart)
 
-    response = redirect(reverse('home'))
+    response = JsonResponse({'cart': cart})
     return response

@@ -9,8 +9,8 @@
 {% block header-nav %}
 <div class="search-group">
     <div class="search-group-border">
-        <input type="text" placeholder="Tên sản phầm tìm kiếm...">
-        <button type="submit" class="btn-search"><i class="fas fa-search"></i> Tìm kiếm</button>
+        <input type="text" id="text-search" placeholder="Tên sản phầm tìm kiếm..." onchange="search(this.value)">
+        <button type="submit" id="btn-search" class="btn-search"><i class="fas fa-search"></i> Tìm kiếm</button>
     </div>
 </div>
 <div class="nav-group">
@@ -54,7 +54,7 @@
     {% endif %}
 
     <!-- Cart button -->
-    <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a>
+    <!-- <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a>
         <span id="product-num-in-cart" class="cart-item">
             {% if request.session.cart %}
             {{ request.session.cart.total }}
@@ -62,7 +62,7 @@
             0
             {% endif%}
         </span>
-    </li>
+    </li> -->
 </ul>
 {% endblock %}
 
@@ -183,7 +183,14 @@
                             <!-- Add product to cart-->
                             <div class="item-order">
                                 <input type="hidden" name="product-id" value="{{ item.productId }}">
-                                <button name="btn-add-prduct-cart" class="zmdi zmdi-shopping-cart-plus"></button>
+                                <i name="btn-add-prduct-cart" class="zmdi zmdi-shopping-cart-plus"></i>
+                                <!-- <template id="item-order-plus-minus"> -->
+                                    <div class="item-order-plus-minus-wrapper">
+                                        <i class="fas fa-minus"></i>
+                                            <span id="order-numbers" class="form-control">{{ item.orderQuantity }}</span>
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                <!-- </template> -->
                             </div>
                         </div>
                     </li>

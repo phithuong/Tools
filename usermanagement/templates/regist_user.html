@@ -15,6 +15,12 @@
                 <h3>Đăng ký tài khoản</h3>
             </div>
 
+            {% if error_message %}
+            <div>
+                <h4 class="error-message">{{ error_message }}</h4>
+            </div>
+            {% endif %}
+
             <div class="login-body">
                 <form method="POST" action="{% url 'regist_user' %}">
                     {% csrf_token %}

@@ -1,0 +1,13 @@
+{
+    "business_error": {
+        "username_incorrect": "Tên đăng nhập không tồn tại. Hãy thử lại.",
+        "password_incorrect": "Mật khẩu không chính xác. Hãy thử lại.",
+        "input_not_enough": "Thông tin bạn nhập chưa đầy đủ. Hãy thử lại.",
+        "username_duplicate": "Tên đăng nhập đã tồn tại. Hãy sử dụng một tên khác.",
+        "email_duplicate": "Địa chỉ mail đã tồn tại. Hãy sử dụng một địa chỉ mail khác.",
+        "confirm_password_mismatch": "Mật khẩu xác nhận không trùng khớp. Hãy thử lại."
+    },
+    "system_error": {
+        "general_system_error": "Đã xảy ra lỗi hệ thống. Vui lòng truy cập trong thời gian tới."
+    }
+}

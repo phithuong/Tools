@@ -16,8 +16,6 @@ class User(models.Model):
     password = models.BinaryField(max_length=256, editable=True, null=True)
     fb_link = models.URLField(unique=True, null=True)
     email = models.EmailField(unique=True, null=True)
-    # gender = models.CharField(choices=GENDER_CHOICES, max_length=50, null=True)
-    # age = models.PositiveIntegerField(null=True)
     address = models.CharField(max_length=256, null=True)
     create_date = models.DateTimeField()
     update_date = models.DateTimeField()

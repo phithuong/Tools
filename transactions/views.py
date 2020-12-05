@@ -1,39 +1,36 @@
-from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse, JsonResponse
-from django.template import Context, loader
-
 import os
 import sys
 import json
 
 WRK_DIR = os.path.join(os.path.dirname(__file__), '../')
-ACCESS_TOKEN_CONFIG_PATH = os.path.join(WRK_DIR, 'config/access_token.json')
-API_LIST_PATH = os.path.join(WRK_DIR, 'config/api_endpoint.json')
-APP_CONFIG_PATH = os.path.join(WRK_DIR, 'config/app.json')
-
 sys.path.append(WRK_DIR)
-from common.access_token import Token
-from common.api import Api
+
 from common.session import get_session, save_session, remove_session
 from usermanagement.models import User
+
+from django.shortcuts import render, redirect, reverse
+from django.http import HttpResponse, JsonResponse
+from django.template import Context, loader
+
+from common.view_base import ViewBase
+view_base = ViewBase()
+api = view_base.get_api_instance()
+messages = view_base.get_messages()
 
 NO_PRODUCT_IN_CART_MESSAGE = 'Giỏ hàng của bạn chưa có sản phẩm nào'
 ORDER_SUCCESS_MESSAGE = 'Đặt hàng thành công'
 
 
 def order(request):
-    # Read app configuration
-    app_config = None
-    with open(APP_CONFIG_PATH, mode='r') as f:
-        app_config = json.load(f)
-    retailer = app_config['retailer']
-
-    # Initiate api
-    api = Api(ACCESS_TOKEN_CONFIG_PATH, API_LIST_PATH, retailer)
-
     if request.method == 'GET':
+
         # Get user information
         user = get_session(request, key='user')
+        if user is None:
+            return redirect('login')
+
+        fb_link = user['fb_link']
+
         user_info = {}
         if user is not None:
             user_kiotviet = api.get_customer_detail(user['user_id'])
@@ -110,18 +107,22 @@ def order(request):
             }
             orderInfo.append(productInfo)
 
+        user = get_session(request, key='user')
+        fb_link = user['fb_link']
+
         customerInfo = {
             "name": full_name,
             "contactNumber": phone_number,
             "address": address,
             "email": email,
-            "comment": note
+            "comment": '{}\n{}'.format(note, fb_link)
         }
 
         branchId = branches[0]['id']
         cashierId = users[0]['id']
+        description = '{}\n{}'.format(note, fb_link)
 
-        order_response = api.add_order(branchId, cashierId, customerInfo, orderInfo)
+        order_response = api.add_order(branchId, cashierId, description, customerInfo, orderInfo)
         remove_session(request, key='cart')
 
         response = render(request, 'checkout_info.html', {'message': ORDER_SUCCESS_MESSAGE})

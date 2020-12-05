@@ -23,6 +23,12 @@
                 </div>
             </div>
 
+            {% if error_message %}
+            <div>
+                <h4 class="error-message">{{ error_message }}</h4>
+            </div>
+            {% endif %}
+
             <div class="login-body">
                 <!-- Form data login -->
                 <form method="POST" action="{% url 'login' %}">

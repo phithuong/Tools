@@ -21,7 +21,7 @@
                     </div>
                     <div class="userInput">
                         <div class="input-group"> 
-                            <input name="fb-name-field" autocomplete="off" type="text" class="form-control" value="Đỗ Trường" disabled>
+                            <input name="fb-name-field" autocomplete="off" type="text" class="form-control" value="">
                             <label class="form-label"><span class="content-name">Tài khoản Facebook</span></label> 
                         </div> 
                         <div class="input-group"> 
@@ -142,6 +142,7 @@
                                 <tr class="row-item">
                                     <!-- Product Name -->
                                     <td class="products-name-cell">
+                                        <input type="hidden" name="product-id" value="{{ key }}">
                                         <i class="fas fa-trash-alt"></i>
                                         {{ value.productName }}
                                     </td>
@@ -151,6 +152,7 @@
 
                                     <!-- Product Number -->
                                     <td class="products-number-cell">
+                                        <input type="hidden" name="product-id" value="{{ key }}">
                                         <i class="fas fa-minus"></i>
                                         <span id="product-numbers" class="form-control">{{ value.productNum }}</span>
                                         <i class="fas fa-plus"></i>

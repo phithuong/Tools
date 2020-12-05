@@ -1,6 +1,8 @@
 {
     "host": "https://mystorewebapp.herokuapp.com/",
-    "port": "8080",
-    "secret_key": "nhl^o9m3knne(9f2ytnz91*5)s()omjil4poc8=9#0wof!q)i5",
-    "retailer": "kimikids"
+    "port": "80",
+    "website_secret_key": "nhl^o9m3knne(9f2ytnz91*5)s()omjil4poc8=9#0wof!q)i5",
+    "retailer": "kimikids",
+    "fb_app_id": "967360890417266",
+    "fb_secret_app": "cf3cd6465f347a2ff74b822720e3b4f7"
 }

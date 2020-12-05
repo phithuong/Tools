@@ -41,10 +41,6 @@ class Api:
         response = None
         try:
             response = requests.request(method, url, **kwargs)
-            # if method == 'POST':
-            #     response = requests.request(method, url, **kwargs)
-            # elif method == 'GET':
-            #     response = requests.request(method, url, headers = headers, params = payload)
 
         except Exception as Ex:
             ex = CustomException(500, ReturnCode.get(500))
@@ -52,7 +48,6 @@ class Api:
 
         return response
 
-    # @Decorators.refresh_token
     def get_product_list(self, currentItem=0, pageSize=20, includeInventory=True):
         method = self._api_list['GetProductList']['method']
         url = self._api_list['GetProductList']['endpoint']
@@ -158,7 +153,7 @@ class Api:
         response = Api.call(method, url, headers=headers, params=payload)
         return response.json()
 
-    def add_order(self, branchId, casherId, customer, orderDetails, makeInvoice=False):
+    def add_order(self, branchId, casherId, customer, description, orderDetails, makeInvoice=False):
         method = self._api_list['AddOrder']['method']
         url = self._api_list['AddOrder']['endpoint']
 
@@ -166,6 +161,7 @@ class Api:
             'branchId': branchId,
             'cashierId': casherId,
             'makeInvoice': False,
+            'description': description,
             'orderDetails': orderDetails,
             'customer': customer
         }

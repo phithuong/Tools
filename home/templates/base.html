@@ -30,12 +30,16 @@
         <!-- Navigation is visible on mobile mode -->
         <div class="header-mobile-nav visible-mobile">
             <nav class="nav-mobile-group">
-                <div class="mobile-humberger"><i class="fas fa-bars fa-2x"></i></div>
-                <div class="logo-mobile-group">
-                    <span><img class="logoImg2" src="{% static 'images/mobile-logo2.png' %}"></img></span>
-                    <h1><span style="color: #86bc42;">Việt</span> Mart</h1>
+                <div class="nav-right-side">
+                    <div class="mobile-humberger"><i class="fas fa-bars fa-2x"></i></div>
+                    <div class="logo-mobile-group">
+                        <span><a href="{% url 'home' %}"><img class="logoImg2" src="{% static 'images/mobile-logo2.png' %}"></img></a></span>
+                        <h1><span style="color: #86bc42;">Việt</span> Mart</h1>
+                    </div>
                 </div>
-                {% block header-mobile-nav %} {% endblock %}
+                <div class="nav-left-side">
+                    {% block header-mobile-nav %} {% endblock %}
+                </div>
             </nav>
         </div>
     </header>
@@ -74,7 +78,17 @@
             <div class="footer-mobile-bar">
                 <ul>
                     <li><a href="{% url 'home' %}" class="fas fa-home fa-2x"></a></li>
-                    <li class="li-cart"><a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a><span class="cart-item">0</span></li>
+                    <li class="li-cart">
+                        <a href="{% url 'order' %}" class="cart-icon fas fa-shopping-cart fa-2x"></a>
+                        
+                        <span class="cart-item">
+                            {% if request.session.cart %}
+                                {{ request.session.cart.total }}
+                            {% else %}
+                            0
+                            {% endif%}
+                        </span>
+                    </li>
                     <li><i class="fab fa-facebook-messenger fa-2x"></i></li>
                     <li>
                         <a href="{% url 'login' %}" class="fas fa-user fa-2x"></a>
@@ -85,7 +99,10 @@
     </footer>
 
     <!-- Chat Plugin -->
-    <div class="fb-customerchat" attribution=setup_tool page_id="104056044837930">
+    <div id="fb-root"></div>
+    <div class="fb-customerchat" attribution=setup_tool page_id="104056044837930"
+        logged_in_greeting="Xin chào, Vinamart có thể giúp gì cho bạn ?"
+        logged_out_greeting="Xin chào, Vinamart có thể giúp gì cho bạn ?">
     </div>
 
     <!-- JS import -->
